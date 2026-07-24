@@ -1,0 +1,418 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f8fafc;
+  font-family: "Inter", sans-serif;
+}
+
+.category-page {
+  width: 100%;
+  padding: 30px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.category-title h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.category-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #6b7280;
+  font-size: 17px;
+}
+
+.category-breadcrumb span:first-child {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* =========================
+   ADD BUTTON
+========================= */
+
+.add-category-btn {
+  text-decoration: none;
+  background: #16a34a;
+  color: #fff;
+  padding: 16px 28px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.add-category-btn:hover {
+  background: #15803d;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.category-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.category-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 30px;
+  gap: 20px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+  position: relative;
+  width: 360px;
+}
+
+.search-box input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding-left: 48px;
+  padding-right: 20px;
+  font-size: 16px;
+  outline: none;
+  transition: .3s;
+}
+
+.search-box input:focus {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22,163,74,.15);
+}
+
+.search-icon {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  color: #6b7280;
+  font-size: 18px;
+}
+
+/* =========================
+   FILTER
+========================= */
+
+.filter-box {
+  width: 170px;
+  position: relative;
+}
+
+.filter-box select {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  appearance: none;
+  padding-left: 18px;
+  padding-right: 40px;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  background: #fff;
+}
+
+.select-icon {
+  position: absolute;
+  right: 15px;
+  top: 18px;
+  font-size: 20px;
+  pointer-events: none;
+  color: #374151;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.category-table thead {
+  background: #f3f4f6;
+}
+
+.category-table th {
+  padding: 18px 20px;
+  text-align: left;
+  color: #374151;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.category-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 16px;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.category-table tbody tr:hover {
+  background: #fafafa;
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.category-image {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.category-table input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+/* ===========================
+   STATUS BADGE
+=========================== */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.published {
+  background: #d1fae5;
+  color: #15803d;
+}
+
+.unpublished {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ===========================
+   ACTION BUTTON
+=========================== */
+
+.action-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .3s;
+}
+
+.action-btn svg {
+  font-size: 20px;
+  color: #6b7280;
+}
+
+.action-btn:hover {
+  background: #f3f4f6;
+}
+
+.action-btn:hover svg {
+  color: #111827;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 28px;
+  border-top: 1px solid #e5e7eb;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.entries {
+  font-size: 16px;
+  color: #4b5563;
+}
+
+/* ===========================
+   PAGINATION
+=========================== */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination button {
+  min-width: 46px;
+  height: 46px;
+  padding: 0 18px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #374151;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.pagination button:hover {
+  background: #f3f4f6;
+}
+
+.pagination .active {
+  background: #16a34a;
+  color: #fff;
+  border-color: #16a34a;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 992px) {
+
+  .category-page {
+    padding: 20px;
+  }
+
+  .category-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .category-title h1 {
+    font-size: 38px;
+  }
+
+  .category-topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box,
+  .filter-box {
+    width: 100%;
+  }
+
+  .table-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .category-page {
+    padding: 15px;
+  }
+
+  .category-title h1 {
+    font-size: 32px;
+  }
+
+  .category-breadcrumb {
+    font-size: 15px;
+    flex-wrap: wrap;
+  }
+
+  .add-category-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .category-table {
+    min-width: 750px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .category-title h1 {
+    font-size: 28px;
+  }
+
+  .category-card {
+    border-radius: 12px;
+  }
+
+  .category-topbar {
+    padding: 18px;
+  }
+
+  .search-box input,
+  .filter-box select {
+    height: 50px;
+    font-size: 15px;
+  }
+
+  .table-footer {
+    padding: 18px;
+  }
+
+  .pagination button {
+    height: 42px;
+    min-width: 42px;
+    font-size: 14px;
+  }
+
+}

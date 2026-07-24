@@ -1,0 +1,420 @@
+/* ===========================
+   RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+.fc-container{
+    max-width:1350px;
+    margin:auto;
+}
+body{
+    background:#f5f7fb;
+    font-family:Inter,sans-serif;
+}
+
+.fc-page{
+    width:100%;
+    max-width:1400px;
+    margin:auto;
+    padding:30px;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.fc-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.fc-header h1{
+    font-size:54px;
+    font-weight:700;
+    color:#1f2937;
+    margin-bottom:12px;
+}
+
+.fc-breadcrumb{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:17px;
+    color:#6b7280;
+}
+
+.fc-breadcrumb .active{
+    color:#22c55e;
+    font-weight:600;
+}
+
+.fc-back-btn{
+    padding:16px 30px;
+    background:#fff;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.fc-back-btn:hover{
+    background:#22c55e;
+    color:#fff;
+}
+
+/* ===========================
+   TOP GRID
+=========================== */
+
+.fc-top-grid{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:25px;
+    align-items:start;
+    margin-bottom:30px;
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.fc-card{
+    background:#fff;
+    border-radius:16px;
+    padding:28px;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+.fc-card h3{
+    font-size:24px;
+    font-weight:600;
+    margin-bottom:28px;
+    color:#1f2937;
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+.fc-image-card{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    min-height:420px;
+}
+.fc-image-card input{
+    width:100%;
+    padding:15px;
+    border:1px solid #dbe2ea;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+.fc-image-card input:focus{
+    border-color:#16a34a;
+    box-shadow:0 0 0 3px rgba(22,163,74,.15);
+}
+.fc-upload-box{
+    width:220px;
+    height:220px;
+    border:2px dashed #c7d2fe;
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.fc-upload-box:hover{
+    border-color:#22c55e;
+}
+
+.fc-upload-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.fc-camera{
+    font-size:52px;
+    margin-bottom:18px;
+}
+
+.fc-upload-box p{
+    font-size:18px;
+    color:#6b7280;
+}
+
+/* ===========================
+   GRID
+=========================== */
+
+.fc-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+}
+
+/* ===========================
+   FORM
+=========================== */
+
+.fc-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:26px;
+}
+
+.fc-group label{
+    font-size:16px;
+    font-weight:600;
+    color:#374151;
+    margin-bottom:10px;
+}
+
+.fc-group input,
+.fc-group select,
+.fc-group textarea{
+    width:100%;
+    border:1px solid #dbe2ea;
+    border-radius:10px;
+    padding:16px 18px;
+    font-size:17px;
+    outline:none;
+    transition:.3s;
+    background:#fff;
+}
+
+.fc-group textarea{
+    resize:none;
+    min-height:180px;
+}
+
+.fc-group input:focus,
+.fc-group select:focus,
+.fc-group textarea:focus{
+    border-color:#22c55e;
+    box-shadow:0 0 0 4px rgba(34,197,94,.15);
+}
+/* ===========================
+   STATUS
+=========================== */
+
+.fc-status{
+    margin-top:10px;
+}
+
+.fc-status>label{
+    display:block;
+    font-size:16px;
+    font-weight:600;
+    color:#1f2937;
+    margin-bottom:15px;
+}
+
+.fc-radio{
+    display:flex;
+    align-items:center;
+    gap:35px;
+}
+
+.fc-radio label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:18px;
+    cursor:pointer;
+    color:#374151;
+}
+
+.fc-radio input[type="radio"]{
+    width:20px;
+    height:20px;
+    accent-color:#16a34a;
+    cursor:pointer;
+}
+
+/* ===========================
+   META CARD
+=========================== */
+
+.fc-meta-card{
+    margin-bottom:30px;
+}
+
+.fc-meta-card textarea{
+    min-height:170px;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.fc-buttons{
+    display:flex;
+    gap:18px;
+    margin-bottom:30px;
+}
+
+.fc-save,
+.fc-create{
+    border:none;
+    padding:15px 34px;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.fc-save{
+    background:#6b7280;
+    color:#fff;
+}
+
+.fc-save:hover{
+    background:#4b5563;
+}
+
+.fc-create{
+    background:#16a34a;
+    color:#fff;
+}
+
+.fc-create:hover{
+    background:#15803d;
+    transform:translateY(-2px);
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (max-width:1024px){
+
+.fc-page{
+    padding:25px;
+}
+
+.fc-top-grid{
+    grid-template-columns:1fr;
+}
+
+.fc-image-card{
+    min-height:auto;
+}
+
+.fc-header{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.fc-back-btn{
+    width:fit-content;
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:768px){
+
+.fc-page{
+    padding:18px;
+}
+
+.fc-grid{
+    grid-template-columns:1fr;
+}
+
+.fc-header h1{
+    font-size:34px;
+}
+
+.fc-card{
+    padding:22px;
+}
+
+.fc-buttons{
+    flex-direction:column;
+}
+
+.fc-save,
+.fc-create{
+    width:100%;
+}
+
+.fc-radio{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+}
+
+.fc-back-btn{
+    width:100%;
+}
+
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media (max-width:480px){
+
+.fc-page{
+    padding:15px;
+}
+
+.fc-header h1{
+    font-size:28px;
+}
+
+.fc-breadcrumb{
+    flex-wrap:wrap;
+    font-size:14px;
+}
+
+.fc-card{
+    padding:18px;
+}
+
+.fc-card h3{
+    font-size:20px;
+}
+
+.fc-group input,
+.fc-group select,
+.fc-group textarea{
+    padding:12px;
+    font-size:15px;
+}
+
+.fc-back-btn,
+.fc-save,
+.fc-create{
+    width:100%;
+}
+
+.fc-buttons{
+    gap:12px;
+}
+
+}

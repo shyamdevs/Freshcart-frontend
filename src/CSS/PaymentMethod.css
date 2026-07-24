@@ -1,0 +1,213 @@
+/* ===========================
+   Payment Page
+=========================== */
+
+.payment-page{
+    width:100%;
+    padding:25px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    box-sizing:border-box;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.payment-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.payment-header h2{
+    margin:0;
+    font-size:28px;
+    color:#222;
+    font-weight:600;
+}
+
+.add-payment-btn{
+    background:#0aad0a;
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.add-payment-btn:hover{
+    background:#098809;
+}
+
+/* ===========================
+   Payment Card
+=========================== */
+
+.payment-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border:1px solid #e5e5e5;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:18px;
+    transition:.3s;
+    background:#fff;
+}
+
+.payment-card:hover{
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.payment-left{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+/* Card Logo */
+
+.payment-logo{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+}
+
+/* Card Details */
+
+.payment-left h3{
+    margin:0;
+    font-size:20px;
+    color:#222;
+}
+
+.payment-left p{
+    margin:8px 0 5px;
+    color:#444;
+    font-size:15px;
+}
+
+.payment-left span{
+    color:#888;
+    font-size:14px;
+}
+
+/* Remove Button */
+
+.remove-payment-btn{
+    background:#fff;
+    color:#dc3545;
+    border:1px solid #dc3545;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+}
+
+.remove-payment-btn:hover{
+    background:#dc3545;
+    color:#fff;
+}
+
+/* Empty State */
+
+.no-payment{
+    width:100%;
+    text-align:center;
+    padding:60px 20px;
+    color:#888;
+    font-size:20px;
+    border:2px dashed #ddd;
+    border-radius:10px;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media(max-width:768px){
+
+    .payment-page{
+        padding:18px;
+    }
+
+    .payment-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .payment-header h2{
+        font-size:24px;
+    }
+
+    .payment-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .payment-left{
+        width:100%;
+    }
+
+    .remove-payment-btn{
+        width:100%;
+    }
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:480px){
+
+    .payment-page{
+        padding:15px;
+    }
+
+    .payment-header h2{
+        font-size:22px;
+    }
+
+    .payment-logo{
+        width:50px;
+        height:50px;
+        font-size:22px;
+    }
+
+    .payment-left{
+        gap:12px;
+    }
+
+    .payment-left h3{
+        font-size:17px;
+    }
+
+    .payment-left p{
+        font-size:14px;
+    }
+
+    .payment-left span{
+        font-size:13px;
+    }
+
+    .add-payment-btn{
+        width:100%;
+    }
+
+}

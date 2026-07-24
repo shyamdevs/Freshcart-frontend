@@ -1,0 +1,299 @@
+/* ===========================
+   MAIN LAYOUT
+=========================== */
+
+.admin-order-main{
+    display:flex;
+    width:100%;
+    min-height:100vh;
+    background:#f8f9fb;
+}
+
+.admin-order-content{
+    flex:1;
+    padding:30px;
+    overflow:auto;
+}
+
+.admin-order-content h1{
+    font-size:34px;
+    color:#1f2937;
+    margin-bottom:25px;
+    font-weight:700;
+}
+
+/* ===========================
+   TOP BAR
+=========================== */
+
+.order-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.order-search{
+    width:350px;
+    max-width:100%;
+    padding:14px 18px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+    background:#fff;
+}
+
+.order-search:focus{
+    border-color:#0aad0a;
+}
+
+.order-filter{
+    width:180px;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+    background:#fff;
+    cursor:pointer;
+}
+
+/* ===========================
+   TABLE
+=========================== */
+
+.order-table{
+    width:100%;
+    overflow-x:auto;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+
+.order-table table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:900px;
+}
+
+.order-table thead{
+    background:#f3f4f6;
+}
+
+.order-table th{
+    padding:18px;
+    text-align:left;
+    color:#555;
+    font-size:15px;
+    font-weight:600;
+}
+
+.order-table td{
+    padding:18px;
+    border-top:1px solid #eee;
+    vertical-align:middle;
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+.order-img{
+    width:55px;
+    height:55px;
+    object-fit:contain;
+    background:#fafafa;
+    border-radius:8px;
+    padding:5px;
+}
+
+.order-table h4{
+    margin:0;
+    font-size:15px;
+    color:#222;
+}
+
+.order-table p{
+    margin-top:6px;
+    font-size:13px;
+    color:#777;
+}
+
+/* ===========================
+   STATUS
+=========================== */
+
+.processing{
+    background:#fff3cd;
+    color:#856404;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.completed{
+    background:#d4edda;
+    color:#155724;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.cancel{
+    background:#f8d7da;
+    color:#721c24;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+/* ===========================
+   Eye 
+=========================== */
+
+.eye-icon{
+    font-size:22px;
+    color:#333;
+    cursor:pointer;
+}
+
+.eye-icon:hover{
+    color:#28a745;
+}
+
+/* ===========================
+   TABLE HOVER
+=========================== */
+
+.order-table tbody tr:hover{
+    background:#fafafa;
+}
+
+/* ===========================
+   LAPTOP
+=========================== */
+
+@media(max-width:1200px){
+
+.admin-order-content{
+    padding:25px;
+}
+
+.order-search{
+    width:300px;
+}
+
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:992px){
+
+.admin-order-content{
+    padding:20px;
+}
+
+.admin-order-content h1{
+    font-size:28px;
+}
+
+.order-top{
+    flex-direction:column;
+    align-items:stretch;
+}
+
+.order-search,
+.order-filter{
+    width:100%;
+}
+
+.order-table table{
+    min-width:850px;
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.admin-order-main{
+    flex-direction:column;
+}
+
+.admin-order-content{
+    padding:15px;
+}
+
+.admin-order-content h1{
+    font-size:24px;
+    text-align:center;
+}
+
+.order-table table{
+    min-width:750px;
+}
+
+.order-table th,
+.order-table td{
+    padding:14px;
+    font-size:13px;
+}
+
+.order-img{
+    width:45px;
+    height:45px;
+}
+
+.order-table h4{
+    font-size:14px;
+}
+
+.order-table p{
+    font-size:12px;
+}
+
+.processing,
+.completed,
+.cancel{
+    font-size:11px;
+    padding:5px 10px;
+}
+
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media(max-width:480px){
+
+.admin-order-content{
+    padding:10px;
+}
+
+.admin-order-content h1{
+    font-size:22px;
+}
+
+.order-table table{
+    min-width:700px;
+}
+
+.order-search,
+.order-filter{
+    padding:12px;
+    font-size:14px;
+}
+
+}

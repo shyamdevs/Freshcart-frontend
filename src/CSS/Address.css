@@ -1,0 +1,277 @@
+/* ===========================
+   Address Page
+=========================== */
+
+.acc-address-page{
+    width:100%;
+    padding:30px;
+    background:#fff;
+    box-sizing:border-box;
+}
+
+.acc-address-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.acc-address-header h2{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+    color:#1f2937;
+}
+
+.acc-add-address-btn{
+    background:#0aad0a;
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.acc-add-address-btn:hover{
+    background:#088408;
+}
+
+/* ===========================
+   Grid
+=========================== */
+
+.acc-address-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+/* ===========================
+   Card
+=========================== */
+
+.acc-address-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:22px;
+    transition:.3s;
+}
+
+.acc-address-card:hover{
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.acc-address-card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.acc-address-type{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.acc-address-type input{
+    width:18px;
+    height:18px;
+}
+
+.acc-address-type span{
+    font-size:17px;
+    font-weight:600;
+    color:#111827;
+}
+
+/* ===========================
+   Details
+=========================== */
+
+.acc-address-details h4{
+    margin-bottom:10px;
+    font-size:19px;
+    color:#111827;
+}
+
+.acc-address-details p{
+    margin:7px 0;
+    color:#6b7280;
+    line-height:1.6;
+    font-size:15px;
+}
+
+/* ===========================
+   Default Badge
+=========================== */
+
+.acc-default-address{
+    margin:20px 0;
+}
+
+.acc-default-badge{
+    display:inline-block;
+    background:#dcfce7;
+    color:#0aad0a;
+    padding:8px 15px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.acc-set-default{
+    color:#0aad0a;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.acc-set-default:hover{
+    text-decoration:underline;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.acc-address-actions{
+    display:flex;
+    gap:12px;
+}
+
+.acc-edit-btn,
+.acc-delete-btn{
+    flex:1;
+    padding:11px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.acc-edit-btn{
+    background:#f3f4f6;
+    color:#111827;
+}
+
+.acc-edit-btn:hover{
+    background:#d1d5db;
+}
+
+.acc-delete-btn{
+    background:#ef4444;
+    color:#fff;
+}
+
+.acc-delete-btn:hover{
+    background:#dc2626;
+}
+
+/* ===========================
+   Empty State
+=========================== */
+
+.acc-no-address{
+    grid-column:1/-1;
+    text-align:center;
+    padding:80px 20px;
+    border:2px dashed #d1d5db;
+    border-radius:12px;
+}
+
+.acc-no-address h3{
+    color:#374151;
+    margin-bottom:10px;
+}
+
+.acc-no-address p{
+    color:#6b7280;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media(max-width:992px){
+
+.acc-address-page{
+    padding:25px;
+}
+
+.acc-address-grid{
+    grid-template-columns:1fr;
+}
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:768px){
+
+.acc-address-page{
+    padding:20px;
+}
+
+.acc-address-header{
+    flex-direction:column;
+    align-items:stretch;
+}
+
+.acc-address-header h2{
+    text-align:center;
+    font-size:24px;
+}
+
+.acc-add-address-btn{
+    width:100%;
+}
+
+.acc-address-card{
+    padding:18px;
+}
+
+.acc-address-actions{
+    flex-direction:column;
+}
+
+}
+
+/* ===========================
+   Small Mobile
+=========================== */
+
+@media(max-width:480px){
+
+.acc-address-page{
+    padding:15px;
+}
+
+.acc-address-card{
+    padding:15px;
+}
+
+.acc-address-type span{
+    font-size:16px;
+}
+
+.acc-default-badge{
+    width:100%;
+    text-align:center;
+}
+
+.acc-set-default{
+    display:block;
+    text-align:center;
+}
+
+}

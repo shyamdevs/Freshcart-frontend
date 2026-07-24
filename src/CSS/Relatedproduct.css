@@ -1,0 +1,150 @@
+/* ===========================
+   RELATED PRODUCTS
+=========================== */
+
+.related-products{
+    width:90%;
+    margin:70px auto;
+}
+
+.related-title{
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:35px;
+    color:#222;
+}
+
+.related-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.related-card{
+    background:#fff;
+    border:1px solid #e9e9e9;
+    border-radius:12px;
+    overflow:hidden;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.related-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.related-image{
+    width:100%;
+    height:240px;
+    background:#f8f8f8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.related-image img{
+    width:85%;
+    height:85%;
+    object-fit:contain;
+    transition:.3s;
+}
+
+.related-card:hover .related-image img{
+    transform:scale(1.08);
+}
+
+.related-content{
+    padding:18px;
+}
+
+.related-category{
+    color:#0aad0a;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.related-name{
+    font-size:20px;
+    font-weight:600;
+    color:#222;
+    margin-bottom:12px;
+    line-height:28px;
+}
+
+.related-price{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.related-sale{
+    font-size:22px;
+    font-weight:bold;
+    color:#111;
+}
+
+.related-regular{
+    color:#888;
+    text-decoration:line-through;
+    font-size:17px;
+}
+
+.related-btn{
+    width:100%;
+    height:48px;
+    border:none;
+    background:#0aad0a;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.related-btn:hover{
+    background:#088408;
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:992px){
+
+    .related-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+    .related-products{
+        width:95%;
+    }
+
+    .related-grid{
+        grid-template-columns:1fr;
+    }
+
+    .related-title{
+        font-size:28px;
+        text-align:center;
+    }
+
+    .related-image{
+        height:220px;
+    }
+
+    .related-name{
+        font-size:18px;
+    }
+
+}

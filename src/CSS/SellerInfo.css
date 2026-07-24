@@ -1,0 +1,26 @@
+.seller-info{
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+}
+
+.seller-info h3{
+    margin-bottom:20px;
+    color:#222;
+}
+
+.seller-info table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.seller-info td{
+    padding:15px;
+    border:1px solid #e5e5e5;
+}
+
+.seller-info td:first-child{
+    width:220px;
+    font-weight:bold;
+    background:#f8f8f8;
+}
