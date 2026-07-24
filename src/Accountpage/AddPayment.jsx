@@ -69,7 +69,7 @@ export default function AddPayment({
 
         axios.post(
 
-            "http://localhost:8080/addpayment",
+            "https://freshcart-backend-orpin.vercel.app/addpayment",
 
             paymentData
 

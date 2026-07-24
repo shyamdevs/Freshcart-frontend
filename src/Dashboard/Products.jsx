@@ -14,7 +14,7 @@ const [statusFilter, setStatusFilter] = useState("All");
 
 
   function getproduct() {
-    axios.get("http://localhost:8080/allproduct").then((res) => {
+    axios.get("https://freshcart-backend-orpin.vercel.app/allproduct").then((res) => {
       if (res.data.status) {
         setproduct(res.data.myallproduct);
       } else {
@@ -31,7 +31,7 @@ const [statusFilter, setStatusFilter] = useState("All");
 
   // delete product ============
   let dltproduct = (dltpro) => {
-    axios.post("http://localhost:8080/deleteproduct", { dltpro }).then((res) => {
+    axios.post("https://freshcart-backend-orpin.vercel.app/deleteproduct", { dltpro }).then((res) => {
       if (res.data.status) {
 
         Swal.fire({

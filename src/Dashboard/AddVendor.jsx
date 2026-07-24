@@ -56,7 +56,7 @@ export default function AddVendor() {
         return;   // <-- Function yahin ruk jayega
     }
 
-    axios.post("http://localhost:8080/addvendor", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/addvendor", {
         vendorvalue
     })
     .then((res) => {

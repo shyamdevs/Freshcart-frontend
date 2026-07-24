@@ -19,7 +19,7 @@ const reviewsPerPage = 10;
 
     function getreview() {
 
-        axios.get("http://localhost:8080/allreviews").then((res) => {
+        axios.get("https://freshcart-backend-orpin.vercel.app/allreviews").then((res) => {
 
             if (res.data.status) {
 
@@ -55,7 +55,7 @@ const reviewsPerPage = 10;
 
             if (result.isConfirmed) {
 
-                axios.post("http://localhost:8080/deletereview", {
+                axios.post("https://freshcart-backend-orpin.vercel.app/deletereview", {
 
                     id: id
 

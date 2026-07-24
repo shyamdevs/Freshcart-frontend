@@ -18,7 +18,7 @@ setforgetpass({...forgetpass, [e.target.name]:e.target.value})
 
 let savedata=(e)=>{
 e.preventDefault();
-axios.post("http://localhost:8080/forgetpass", {forgetpass}).then((res) => {
+axios.post("https://freshcart-backend-orpin.vercel.app/forgetpass", {forgetpass}).then((res) => {
       if (res.data.status) {
         Swal.fire({
           text: "password change success",

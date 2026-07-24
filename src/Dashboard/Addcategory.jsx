@@ -16,7 +16,7 @@ let go =useNavigate()
 
     const savedata = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8080/category", { categoryvalue }).then(() => {
+        axios.post("https://freshcart-backend-orpin.vercel.app/category", { categoryvalue }).then(() => {
                     Swal.fire({
                         text: "Category added!",
                         icon: "success"

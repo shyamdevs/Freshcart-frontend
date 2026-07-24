@@ -15,7 +15,7 @@ export default function Addproduct() {
 
     useEffect(() => {
 
-        axios.get("http://localhost:8080/allvendor")
+        axios.get("https://freshcart-backend-orpin.vercel.app/allvendor")
 
             .then((res) => {
 
@@ -67,7 +67,7 @@ export default function Addproduct() {
 
     const savedata = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8080/product", { productvalue }).then(() => {
+        axios.post("https://freshcart-backend-orpin.vercel.app/product", { productvalue }).then(() => {
             Swal.fire({
                 text: "Product added!",
                 icon: "success"
@@ -83,7 +83,7 @@ export default function Addproduct() {
 
 
     let getcategory = () => {
-        axios.get("http://localhost:8080/AllCategory").then((res) => {
+        axios.get("https://freshcart-backend-orpin.vercel.app/AllCategory").then((res) => {
             if (res.data.status) {
                 setcategories(res.data.myallcategory)
             }

@@ -20,7 +20,7 @@ export default function YourOrders() {
     // Orders
     function getOrders() {
 
-        axios.post("http://localhost:8080/myorders", {
+        axios.post("https://freshcart-backend-orpin.vercel.app/myorders", {
 
             userId: user._id
 
@@ -47,7 +47,7 @@ export default function YourOrders() {
     // Address
     function getAddress() {
 
-        axios.post("http://localhost:8080/getaddress", {
+        axios.post("https://freshcart-backend-orpin.vercel.app/getaddress", {
 
             userId: user._id
 

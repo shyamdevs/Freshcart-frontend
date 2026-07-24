@@ -27,7 +27,7 @@ export default function AddressPopup({ closePopup }) {
 
     e.preventDefault();
 
-    axios.post("http://localhost:8080/addaddress", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/addaddress", {
 
       addressdata: {
 

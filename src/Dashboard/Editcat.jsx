@@ -21,7 +21,7 @@ const go = useNavigate();
     e.preventDefault();
 
     axios.post(
-        "http://localhost:8080/updatecategory",
+        "https://freshcart-backend-orpin.vercel.app/updatecategory",
         {categoryvalue}
     ).then((res) => {
 

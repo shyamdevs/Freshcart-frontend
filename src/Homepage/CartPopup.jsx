@@ -21,7 +21,7 @@ export default function CartPopup({ closePopup }) {
   }, []);
 
   function getProducts() {
-    axios.get("http://localhost:8080/cart").then((res) => {
+    axios.get("https://freshcart-backend-orpin.vercel.app/cart").then((res) => {
       if (res.data.status) {
 
         setProducts(
@@ -59,7 +59,7 @@ export default function CartPopup({ closePopup }) {
   };
 
   const deletecart = (id) => {
-    axios.post("http://localhost:8080/deleteshopcart", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/deleteshopcart", {
       _id: id,
     })
       .then((res) => {
@@ -122,7 +122,7 @@ export default function CartPopup({ closePopup }) {
         orderPlaced = true;
 
 
-        axios.post("http://localhost:8080/addorder", {
+        axios.post("https://freshcart-backend-orpin.vercel.app/addorder", {
 
           products: products.map((item) => ({
 
@@ -188,7 +188,7 @@ export default function CartPopup({ closePopup }) {
 
 const orderNumber = "#" + Math.floor(Math.random() * 90000 + 10000);
 
-          axios.post("http://localhost:8080/addorder", {
+          axios.post("https://freshcart-backend-orpin.vercel.app/addorder", {
 
             products: products.map((item) => ({
 
@@ -252,7 +252,7 @@ const orderNumber = "#" + Math.floor(Math.random() * 90000 + 10000);
 // address--------------------
 function getAddress() {
 
-  axios.post("http://localhost:8080/getaddress", {
+  axios.post("https://freshcart-backend-orpin.vercel.app/getaddress", {
 
     userId: user._id
 

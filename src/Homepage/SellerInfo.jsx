@@ -9,7 +9,7 @@ export default function SellerInfo({ product }) {
 
     useEffect(() => {
 
-        axios.post("http://localhost:8080/vendorbyid", {
+        axios.post("https://freshcart-backend-orpin.vercel.app/vendorbyid", {
 
             vendorId: product.vendorId
 

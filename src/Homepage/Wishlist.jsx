@@ -18,7 +18,7 @@ export default function Wishlist() {
   }, []);
 
   function getProducts() {
-    axios.post("http://localhost:8080/wishlist", { email: user.email})
+    axios.post("https://freshcart-backend-orpin.vercel.app/wishlist", { email: user.email})
       .then((res) => {
         if (res.data.status) {
           setProducts(res.data.mywishlist);
@@ -29,7 +29,7 @@ export default function Wishlist() {
 
   const removeWishlist = (id) => {
 
-    axios.post("http://localhost:8080/deletewishlist", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/deletewishlist", {
       _id: id,
        email:user.email
     }).then((res) => {
@@ -47,7 +47,7 @@ export default function Wishlist() {
 
   const addToCart = (item) => {
 
-    axios.post("http://localhost:8080/addtocart", item)
+    axios.post("https://freshcart-backend-orpin.vercel.app/addtocart", item)
       .then((res) => {
 
         if (res.data.status) {
@@ -61,7 +61,7 @@ export default function Wishlist() {
           });
 
           // Wishlist se remove bhi kar do
-          axios.post("http://localhost:8080/deletewishlist", {
+          axios.post("https://freshcart-backend-orpin.vercel.app/deletewishlist", {
             _id: item._id,
              email: user.email
           });

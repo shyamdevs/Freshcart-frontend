@@ -19,7 +19,7 @@ export default function SellerVendor() {
 
     function getVendor() {
 
-        axios.get("http://localhost:8080/vendordashboard")
+        axios.get("https://freshcart-backend-orpin.vercel.app/vendordashboard")
             .then((res) => {
 
                 if (res.data.status) {
@@ -47,7 +47,7 @@ export default function SellerVendor() {
 
         if (result.isConfirmed) {
 
-            axios.post("http://localhost:8080/deletevendor", {
+            axios.post("https://freshcart-backend-orpin.vercel.app/deletevendor", {
                 id: id
             })
             .then((res) => {

@@ -20,7 +20,7 @@ export default function PaymentMethod() {
 
         axios.post(
 
-            "http://localhost:8080/getpayment",
+            "https://freshcart-backend-orpin.vercel.app/getpayment",
 
             {
 
@@ -70,7 +70,7 @@ export default function PaymentMethod() {
 
                 axios.post(
 
-                    "http://localhost:8080/deletepayment",
+                    "https://freshcart-backend-orpin.vercel.app/deletepayment",
 
                     {
 

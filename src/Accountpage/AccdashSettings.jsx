@@ -60,7 +60,7 @@ const handleNameChange = (e) => {
 
 const updateDetails = () => {
 
-    axios.post("http://localhost:8080/updateuser", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/updateuser", {
         userdata
     }).then((res) => {
 
@@ -124,7 +124,7 @@ const savePassword = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  axios.post("http://localhost:8080/updatepassword", {
+  axios.post("https://freshcart-backend-orpin.vercel.app/updatepassword", {
     id: user._id,
     currentPassword: password.currentPassword,
     newPassword: password.newPassword
@@ -167,7 +167,7 @@ const deleteAccount = () => {
 
     if (result.isConfirmed) {
 
-      axios.post("http://localhost:8080/deleteaccount", {
+      axios.post("https://freshcart-backend-orpin.vercel.app/deleteaccount", {
         _id: user._id
       }).then((res) => {
 
