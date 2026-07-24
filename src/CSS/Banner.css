@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: #ffffff;
+}
+
+/* Main Section */
+.offer-section {
+  width: 100%;
+  padding: 50px 55px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 42px;
+}
+
+/* Common Card Design */
+.offer-card {
+  min-height: 285px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center right;
+  display: flex;
+  align-items: center;
+}
+
+/* Background Images */
+ .fruit-card {
+  background-image: url("../Images/grocery-banner.png");
+}
+
+.bun-card {
+  background-image: url("../Images/grocery-banner-2.jpg");
+}
+
+/* Text Content */
+.offer-content {
+  padding-left: 45px;
+  max-width: 330px;
+}
+
+.offer-content h2 {
+  font-size: 34px;
+  line-height: 1.2;
+  color: #102b3f;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+.offer-content p {
+  font-size: 20px;
+  color: #4d6070;
+  margin-bottom: 26px;
+}
+
+.offer-content p span {
+  font-weight: 700;
+}
+
+.offer-content a {
+  display: inline-block;
+  padding: 15px 24px;
+  background: #00293b;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 9px;
+  font-size: 20px;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+.offer-content a:hover {
+  background: #01425f;
+  transform: translateY(-2px);
+}
+
+/* Tablet Responsive */
+@media (max-width: 992px) {
+  .offer-section {
+    padding: 35px 25px;
+    gap: 25px;
+  }
+
+  .offer-card {
+    min-height: 250px;
+  }
+
+  .offer-content {
+    padding-left: 30px;
+  }
+
+  .offer-content h2 {
+    font-size: 28px;
+  }
+
+  .offer-content p {
+    font-size: 18px;
+  }
+
+  .offer-content a {
+    font-size: 17px;
+    padding: 13px 21px;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .offer-section {
+    grid-template-columns: 1fr;
+    padding: 25px 15px;
+  }
+
+  .offer-card {
+    min-height: 230px;
+    background-position: center right;
+  }
+
+  .offer-content {
+    padding-left: 25px;
+    max-width: 280px;
+  }
+
+  .offer-content h2 {
+    font-size: 26px;
+  }
+
+  .offer-content p {
+    font-size: 17px;
+    margin-bottom: 22px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .offer-section {
+    padding: 18px 12px;
+    gap: 18px;
+  }
+
+  .offer-card {
+    min-height: 220px;
+    border-radius: 8px;
+    background-position: center;
+  }
+
+  .fruit-card,
+  .bun-card {
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.96) 0%,
+        rgba(255, 255, 255, 0.82) 55%,
+        rgba(255, 255, 255, 0.2) 100%
+      ),
+      var(--bg);
+  }
+
+  .fruit-card {
+    --bg: url("../Images/grocery-banner.png");
+  }
+
+  .bun-card {
+    --bg: url("../Images/grocery-banner-2.jpg");
+  }
+
+  .offer-content {
+    padding-left: 20px;
+    max-width: 230px;
+  }
+
+  .offer-content h2 {
+    font-size: 23px;
+  }
+
+  .offer-content p {
+    font-size: 15px;
+  }
+
+  .offer-content a {
+    font-size: 15px;
+    padding: 11px 18px;
+  }
+}

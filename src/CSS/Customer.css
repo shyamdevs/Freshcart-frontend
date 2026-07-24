@@ -1,0 +1,681 @@
+
+
+/* ===================================================
+   PAGE
+=================================================== */
+
+.customer-page{
+    width:100%;
+    padding:30px;
+}
+
+/* ===================================================
+   HEADER
+=================================================== */
+
+.customer-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.customer-header-left{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.customer-header h1{
+    font-size:42px;
+    font-weight:700;
+    color:#1f2937;
+}
+
+.customer-breadcrumb{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    font-size:16px;
+    color:#6b7280;
+}
+
+.customer-breadcrumb .active{
+    color:#16a34a;
+    font-weight:600;
+}
+
+/* ===================================================
+   BUTTON
+=================================================== */
+
+.add-customer-btn{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;
+    background:#16a34a;
+    color:#fff;
+    padding:14px 26px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.add-customer-btn:hover{
+    background:#15803d;
+}
+
+/* ===================================================
+   CARD
+=================================================== */
+
+.customer-card{
+    width:100%;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    overflow:hidden;
+}
+
+/* ===================================================
+   TOP BAR
+=================================================== */
+
+.customer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:24px;
+    border-bottom:1px solid #eef2f7;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+/* ===================================================
+   SEARCH
+=================================================== */
+
+.customer-search{
+    position:relative;
+    width:340px;
+    max-width:100%;
+}
+
+.customer-search input{
+    width:100%;
+    height:52px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    outline:none;
+    padding:0 18px 0 48px;
+    font-size:15px;
+    transition:.3s;
+    background:#fff;
+}
+
+.customer-search input:focus{
+    border-color:#16a34a;
+    box-shadow:0 0 0 3px rgba(22,163,74,.15);
+}
+
+.search-icon{
+    position:absolute;
+    top:50%;
+    left:16px;
+    transform:translateY(-50%);
+    font-size:18px;
+    color:#6b7280;
+}
+
+/* ===================================================
+   TABLE WRAPPER
+=================================================== */
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+}
+/* ===================================================
+   TABLE
+=================================================== */
+.customer-table{
+    width:100%;
+    min-width:900px;
+    border-collapse:collapse;
+}
+
+.customer-table thead{
+    background:#f8fafc;
+}
+
+.customer-table th,
+.customer-table td{
+    padding:18px;
+    text-align:left;
+    vertical-align:middle;
+}
+
+.customer-table th{
+    font-size:15px;
+    font-weight:600;
+    color:#374151;
+}
+
+.customer-table td{
+    font-size:15px;
+    border-bottom:1px solid #edf2f7;
+    color:#374151;
+    word-break:break-word;
+}
+
+.customer-table tbody tr{
+    transition:.3s;
+}
+
+.customer-table tbody tr:hover{
+    background:#f9fafb;
+}
+
+.customer-table input[type="checkbox"]{
+    width:18px;
+    height:18px;
+    cursor:pointer;
+}
+/* ===================================================
+   CUSTOMER INFO
+=================================================== */
+
+.customer-info{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.customer-avatar{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    object-fit:cover;
+    flex-shrink:0;
+    border:2px solid #f3f4f6;
+}
+
+.customer-name{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.customer-name h4{
+    font-size:15px;
+    font-weight:600;
+    color:#111827;
+    margin-bottom:4px;
+}
+
+.customer-name span{
+    font-size:13px;
+    color:#6b7280;
+}
+
+/* ===================================================
+   TABLE COLUMN WIDTH
+=================================================== */
+/* 
+.customer-table th:nth-child(1),
+.customer-table td:nth-child(1){
+    width:5%;
+    text-align:center;
+}
+
+.customer-table th:nth-child(2),
+.customer-table td:nth-child(2){
+    width:28%;
+}
+
+.customer-table th:nth-child(3),
+.customer-table td:nth-child(3){
+    width:25%;
+}
+
+.customer-table th:nth-child(4),
+.customer-table td:nth-child(4){
+    width:20%;
+}
+
+.customer-table th:nth-child(5),
+.customer-table td:nth-child(5){
+    width:17%;
+}
+
+.customer-table th:nth-child(6),
+.customer-table td:nth-child(6){
+    width:5%;
+    text-align:center;
+} */
+
+.customer-table th,
+.customer-table td{
+    white-space:nowrap;
+}
+/* ===================================================
+   EMAIL
+=================================================== */
+
+.customer-email{
+    color:#4b5563;
+    font-size:15px;
+    word-break:break-word;
+}
+
+/* ===================================================
+   PURCHASE DATE
+=================================================== */
+
+.purchase-date{
+    font-size:15px;
+    color:#4b5563;
+}
+
+/* ===================================================
+   PHONE
+=================================================== */
+
+.customer-phone{
+    font-size:15px;
+    color:#4b5563;
+}
+
+/* ===================================================
+   ACTION BUTTON
+=================================================== */
+
+.action-btn{
+    width:38px;
+    height:38px;
+    border:none;
+    background:transparent;
+    border-radius:8px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.action-btn svg{
+    font-size:20px;
+    color:#6b7280;
+}
+
+.action-btn:hover{
+    background:#f3f4f6;
+}
+
+.action-btn:hover svg{
+    color:#111827;
+}
+
+/* ===================================================
+   FOOTER
+=================================================== */
+
+.customer-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 25px;
+    border-top:1px solid #edf2f7;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.entries{
+    font-size:15px;
+    color:#6b7280;
+}
+
+/* ===================================================
+   PAGINATION
+=================================================== */
+
+.pagination{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.pagination button{
+    min-width:40px;
+    height:40px;
+    padding:0 16px;
+    border:1px solid #d1d5db;
+    background:#fff;
+    color:#374151;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+    font-size:14px;
+    font-weight:500;
+}
+
+.pagination button:hover{
+    background:#f3f4f6;
+}
+
+.pagination .active{
+    background:#16a34a;
+    color:#fff;
+    border-color:#16a34a;
+}
+
+/* ===================================================
+   TABLE HOVER
+=================================================== */
+
+.customer-table tbody tr:hover .customer-name h4{
+    color:#16a34a;
+}
+
+.customer-table tbody tr:hover .customer-email{
+    color:#111827;
+}
+
+/* ===================================================
+   CHECKBOX
+=================================================== */
+
+.customer-table input[type="checkbox"]{
+    accent-color:#16a34a;
+    cursor:pointer;
+}
+/* ===================================================
+   LARGE LAPTOP
+=================================================== */
+
+@media (max-width:1200px){
+
+.customer-page{
+    padding:25px;
+}
+
+.customer-header h1{
+    font-size:36px;
+}
+
+.customer-search{
+    width:300px;
+}
+
+.customer-table th,
+.customer-table td{
+    padding:16px;
+}
+
+}
+
+/* ===================================================
+   TABLET
+=================================================== */
+
+@media (max-width:992px){
+
+.customer-page{
+    padding:20px;
+}
+
+.customer-header{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.customer-header-left{
+    width:100%;
+}
+
+.customer-header h1{
+    font-size:32px;
+}
+
+.add-customer-btn{
+    width:100%;
+}
+
+.customer-top{
+    flex-direction:column;
+    align-items:stretch;
+}
+
+.customer-search{
+    width:100%;
+}
+
+.customer-footer{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+.pagination{
+    justify-content:center;
+}
+
+/* Table */
+
+/* .customer-table{
+    table-layout:auto;
+} */
+
+.customer-table th,
+.customer-table td{
+    padding:14px;
+    font-size:14px;
+}
+
+}
+
+/* ===================================================
+   MOBILE
+=================================================== */
+
+@media (max-width:768px){
+
+.customer-page{
+    padding:15px;
+}
+
+.customer-header h1{
+    font-size:28px;
+}
+
+.customer-breadcrumb{
+    font-size:14px;
+}
+
+.customer-card{
+    border-radius:12px;
+}
+
+.customer-top{
+    padding:18px;
+}
+
+.customer-search{
+    width:100%;
+}
+
+.customer-search input{
+    height:48px;
+    font-size:14px;
+}
+
+.customer-info{
+    gap:10px;
+}
+
+.customer-avatar{
+    width:38px;
+    height:38px;
+}
+
+.customer-name h4{
+    font-size:14px;
+}
+
+.customer-name span{
+    font-size:12px;
+}
+
+.customer-table{
+    width:100%;
+}
+
+.customer-table th,
+.customer-table td{
+    padding:12px 10px;
+    font-size:13px;
+    white-space:normal;
+}
+
+.customer-footer{
+    padding:18px;
+}
+
+.entries{
+    text-align:center;
+    width:100%;
+}
+
+.pagination{
+    width:100%;
+    justify-content:center;
+    gap:6px;
+}
+
+.pagination button{
+    min-width:36px;
+    height:36px;
+    font-size:13px;
+}
+
+}
+
+/* ===================================================
+   SMALL MOBILE
+=================================================== */
+
+@media (max-width:576px){
+
+.customer-page{
+    padding:12px;
+}
+
+.customer-header{
+    gap:15px;
+}
+
+.customer-header h1{
+    font-size:24px;
+}
+
+.customer-breadcrumb{
+    font-size:13px;
+    gap:5px;
+}
+
+.add-customer-btn{
+    width:100%;
+    padding:12px;
+    font-size:14px;
+}
+
+.customer-top{
+    padding:15px;
+}
+
+.customer-search input{
+    height:44px;
+    font-size:13px;
+}
+
+.customer-card{
+    border-radius:10px;
+}
+
+/* Make long content wrap */
+
+.customer-table td{
+    word-break:break-word;
+}
+
+.customer-footer{
+    padding:15px;
+}
+
+.entries{
+    font-size:13px;
+}
+
+.pagination button{
+    min-width:34px;
+    height:34px;
+    padding:0 10px;
+    font-size:12px;
+}
+
+}
+
+/* ===================================================
+   EXTRA SMALL DEVICES
+=================================================== */
+
+@media (max-width:400px){
+
+.customer-page{
+    padding:10px;
+}
+
+.customer-header h1{
+    font-size:22px;
+}
+
+.customer-search input{
+    padding-left:42px;
+}
+
+.search-icon{
+    left:14px;
+}
+
+.customer-avatar{
+    width:34px;
+    height:34px;
+}
+
+.customer-name h4{
+    font-size:13px;
+}
+
+.customer-name span{
+    font-size:11px;
+}
+
+.pagination{
+    gap:4px;
+}
+
+.pagination button{
+    min-width:30px;
+    height:30px;
+    font-size:11px;
+}
+
+}

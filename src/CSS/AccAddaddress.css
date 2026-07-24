@@ -1,0 +1,272 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Overlay */
+.address-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 25px;
+
+  overflow-y: auto;   /* IMPORTANT */
+  z-index: 9999;
+}
+
+/* Popup */
+
+.address-popup {
+  width: 100%;
+  max-width: 700px;
+
+  background: #fff;
+  border-radius: 18px;
+
+  padding: 35px;
+
+  margin: auto;
+
+  max-height: 90vh;      /* IMPORTANT */
+  overflow-y: auto;      /* IMPORTANT */
+
+  animation: popup .3s ease;
+}
+
+@keyframes popup {
+  from {
+    transform: translateY(-20px) scale(.96);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.popup-title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #08253d;
+  margin-bottom: 10px;
+}
+
+.popup-subtitle {
+  font-size: 17px;
+  color: #6b7280;
+  margin-bottom: 28px;
+}
+
+/* Form */
+
+.address-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.address-input,
+.address-select {
+  width: 100%;
+  height: 58px;
+  border: 1px solid #dcdcdc;
+  border-radius: 14px;
+  padding: 0 22px;
+  font-size: 18px;
+  outline: none;
+  transition: .3s;
+  background: #fff;
+}
+
+.address-input:focus,
+.address-select:focus {
+  border-color: #11b311;
+  box-shadow: 0 0 0 3px rgba(17, 179, 17, 0.12);
+}
+
+.address-input::placeholder {
+  color: #8c96a0;
+}
+
+.address-select {
+  cursor: pointer;
+}
+
+/* Checkbox */
+
+.checkbox-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #374151;
+}
+
+.checkbox-area input {
+  width: 20px;
+  height: 20px;
+  accent-color: #16a34a;
+  cursor: pointer;
+}
+
+/* Buttons */
+
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.cancel-btn,
+.save-btn {
+  height: 58px;
+  padding: 0 34px;
+  border-radius: 14px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.cancel-btn {
+  background: #fff;
+  color: #14a514;
+  border: 2px solid #14a514;
+}
+
+.cancel-btn:hover {
+  background: #f3fff3;
+}
+
+.save-btn {
+  background: #0bb20b;
+  color: #fff;
+  border: none;
+}
+
+.save-btn:hover {
+  background: #089808;
+}
+/* ==========================
+   Tablet
+========================== */
+
+@media (max-width: 992px) {
+
+  .address-popup {
+    max-width: 600px;
+    padding: 30px;
+  }
+
+  .popup-title {
+    font-size: 30px;
+  }
+
+  .popup-subtitle {
+    font-size: 16px;
+  }
+
+  .address-input,
+  .address-select {
+    height: 54px;
+    font-size: 17px;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    height: 54px;
+    font-size: 18px;
+  }
+
+}
+
+/* ==========================
+   Mobile
+========================== */
+@media (max-width:768px){
+
+    .address-overlay{
+        align-items:flex-start;
+        padding:20px;
+    }
+
+    .address-popup{
+        width:100%;
+        max-width:100%;
+        margin:20px 0;
+
+        max-height:none;
+        overflow:visible;
+
+        padding:22px;
+    }
+
+    .popup-buttons{
+        flex-direction:column;
+    }
+
+    .cancel-btn,
+    .save-btn{
+        width:100%;
+    }
+
+}
+/* ==========================
+   Small Mobile
+========================== */
+
+@media (max-width:480px) {
+
+  .address-overlay {
+    padding: 10px;
+  }
+
+  .address-popup {
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .popup-title {
+    font-size: 22px;
+  }
+
+  .popup-subtitle {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .address-input,
+  .address-select {
+    height: 48px;
+    font-size: 15px;
+    padding: 0 15px;
+  }
+
+  .checkbox-area {
+    font-size: 15px;
+    gap: 8px;
+  }
+
+  .checkbox-area input {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    height: 48px;
+    font-size: 16px;
+  }
+
+}

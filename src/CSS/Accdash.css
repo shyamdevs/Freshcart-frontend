@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===========================
+   Desktop Sidebar
+=========================== */
+
+.profile-sidebar {
+  width: 320px;
+  min-height: 100vh;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  padding: 40px 25px;
+  transition: 0.35s ease;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #1f2937;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.sidebar-item:hover {
+  background: #f4f4f4;
+}
+
+.sidebar-icon {
+  font-size: 24px;
+}
+
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 25px 0;
+}
+
+.logout:hover {
+  color: #e53935;
+  background: #fff2f2;
+}
+
+/* ===========================
+   Mobile Header
+=========================== */
+
+.account-header {
+  display: none;
+}
+
+.menu-btn,
+.close-btn {
+  display: none;
+}
+
+.overlay {
+  display: none;
+}
+
+/* Hide top section on desktop */
+.sidebar-top {
+  display: none;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media (max-width: 992px) {
+
+  .profile-sidebar {
+    width: 270px;
+    padding: 30px 20px;
+  }
+
+  .sidebar-item {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .sidebar-icon {
+    font-size: 22px;
+  }
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width:768px) {
+
+  /* Header */
+
+  .account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    border-bottom: 1px solid #ddd;
+    background: white;
+  }
+
+  .account-header h2 {
+    font-size: 22px;
+    color: #0f2940;
+    font-weight: 700;
+  }
+
+  .menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    font-size: 25px;
+    color: #666;
+    cursor: pointer;
+  }
+
+  /* Sidebar */
+
+  .profile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    border-right: 1px solid #ddd;
+    z-index: 1001;
+    transition: left .35s ease;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .profile-sidebar.show {
+    left: 0;
+  }
+
+  .sidebar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+
+  .sidebar-top h2 {
+    font-size: 22px;
+    color: #0f2940;
+  }
+
+  .close-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+  }
+
+  .sidebar-item {
+    font-size: 17px;
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .sidebar-icon {
+    font-size: 21px;
+  }
+
+  /* Overlay */
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    z-index: 1000;
+  }
+
+}
+
+/* ===========================
+   Small Mobile
+=========================== */
+
+@media (max-width:480px) {
+
+  .account-header {
+    padding: 16px;
+  }
+
+  .account-header h2 {
+    font-size: 20px;
+  }
+
+  .profile-sidebar {
+    width: 260px;
+  }
+
+  .sidebar-item {
+    font-size: 16px;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .sidebar-icon {
+    font-size: 20px;
+  }
+
+}
+
+
+

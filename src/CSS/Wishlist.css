@@ -1,0 +1,217 @@
+.wish-container{
+    width:90%;
+    margin:40px auto;
+}
+
+
+/* Header */
+
+.wish-page-header h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+
+.wish-page-header p{
+    color:#777;
+}
+
+
+.wish-product-length{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    min-width:30px;
+    height:30px;
+    padding:0 10px;
+    background:#16a34a;
+    color:white;
+    font-size:15px;
+    font-weight:700;
+    border-radius:50px;
+    margin:0 5px;
+}
+
+
+
+/* Box */
+
+.wish-product-container{
+
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+    margin-top:20px;
+
+}
+
+
+.wish-table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+
+
+.wish-table{
+
+    width:100%;
+    min-width:900px;
+    border-collapse:collapse;
+
+}
+
+
+.wish-table th,
+.wish-table td{
+
+    padding:18px;
+    text-align:center;
+    vertical-align:middle;
+
+}
+
+
+
+.wish-product-img{
+
+    width:60px;
+    height:60px;
+    object-fit:cover;
+    display:block;
+    margin:auto;
+
+}
+
+
+
+.wish-product-name{
+
+    font-weight:600;
+    color:#333;
+
+}
+
+
+
+.wish-price{
+
+    color:#16a34a;
+    font-weight:700;
+
+}
+
+
+
+/* Status */
+
+.wish-status{
+
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+
+}
+
+
+.wish-active{
+
+    background:#dcfce7;
+    color:#15803d;
+
+}
+
+
+.wish-pending{
+
+    background:#fef9c3;
+    color:#ca8a04;
+
+}
+
+
+.wish-inactive{
+
+    background:#fee2e2;
+    color:#dc2626;
+
+}
+
+
+
+/* Buttons */
+
+.wish-cart-btn{
+
+    background:#16a34a;
+    color:white;
+    border:none;
+    padding:8px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+
+.wish-cart-btn:hover{
+
+    background:#15803d;
+
+}
+
+
+
+.wish-delete-btn{
+
+    background:#dc2626;
+    color:white;
+    border:none;
+    width:35px;
+    height:35px;
+    border-radius:6px;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+
+.wish-delete-btn:hover{
+
+    background:#b91c1c;
+
+}
+
+
+
+/* Mobile */
+
+@media(max-width:768px){
+
+
+.wish-container{
+
+    width:95%;
+
+}
+
+
+.wish-page-header h1{
+
+    font-size:26px;
+
+}
+
+
+.wish-table{
+
+    min-width:800px;
+
+}
+
+
+}

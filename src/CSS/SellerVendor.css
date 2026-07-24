@@ -1,0 +1,290 @@
+/* ===========================
+   Seller Vendor Page
+=========================== */
+
+.seller-page{
+    padding:30px;
+    background:#f5f7fb;
+    min-height:100vh;
+    box-sizing:border-box;
+}
+
+
+.vendor-card{
+    position: relative;
+}
+
+.delete-vendor-btn{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: #ff4d4f;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.delete-vendor-btn:hover{
+    background: #d9363e;
+    transform: scale(1.1);
+}
+
+/* ===========================
+   Top Section
+=========================== */
+
+.seller-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+    gap:20px;
+}
+
+.seller-top h2{
+    margin:0;
+    font-size:30px;
+    color:#222;
+    font-weight:700;
+}
+
+.add-btn{
+    background:#0aad0a;
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.add-btn:hover{
+    background:#088808;
+}
+
+/* ===========================
+   Vendor Grid
+=========================== */
+
+.vendor-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:25px;
+}
+
+/* ===========================
+   Vendor Card
+=========================== */
+
+.vendor-card{
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.vendor-card:hover{
+    transform:translateY(-6px);
+}
+
+.vendor-card img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:0 auto;
+    border:4px solid #f1f1f1;
+}
+
+.vendor-card h3{
+    text-align:center;
+    margin:15px 0;
+    color:#222;
+    font-size:22px;
+}
+
+.vendor-card p{
+    margin:10px 0;
+    font-size:15px;
+    color:#555;
+    line-height:24px;
+}
+
+.vendor-card strong{
+    color:#222;
+}
+
+/* ===========================
+   Gross Sale & Earning
+=========================== */
+
+.vendor-price{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    border-top:1px solid #e6e6e6;
+    padding-top:18px;
+}
+
+.vendor-price div{
+    width:48%;
+    text-align:center;
+    background:#f8f9fa;
+    border-radius:10px;
+    padding:15px;
+}
+
+.vendor-price span{
+    display:block;
+    color:#777;
+    font-size:14px;
+}
+
+.vendor-price h4{
+    margin-top:8px;
+    color:#0aad0a;
+    font-size:22px;
+}
+
+/* ===========================
+   Action Buttons
+=========================== */
+
+.vendor-actions{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    gap:10px;
+}
+
+.vendor-actions button{
+    flex:1;
+    border:none;
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.view-btn{
+    background:#0d6efd;
+    color:white;
+}
+
+.view-btn:hover{
+    background:#0b5ed7;
+}
+
+.edit-btn{
+    background:#ffc107;
+    color:black;
+}
+
+.edit-btn:hover{
+    background:#e0a800;
+}
+
+.delete-btn{
+    background:#dc3545;
+    color:white;
+}
+
+.delete-btn:hover{
+    background:#bb2d3b;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media(max-width:992px){
+
+    .seller-page{
+        padding:20px;
+    }
+
+    .seller-top h2{
+        font-size:26px;
+    }
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:768px){
+
+    .seller-top{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .seller-top h2{
+        font-size:24px;
+    }
+
+    .add-btn{
+        width:100%;
+    }
+
+    .vendor-container{
+        grid-template-columns:1fr;
+    }
+
+    .vendor-price{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .vendor-price div{
+        width:100%;
+    }
+
+    .vendor-actions{
+        flex-direction:column;
+    }
+
+}
+
+/* ===========================
+   Small Mobile
+=========================== */
+
+@media(max-width:480px){
+
+    .seller-page{
+        padding:15px;
+    }
+
+    .vendor-card{
+        padding:18px;
+    }
+
+    .vendor-card h3{
+        font-size:20px;
+    }
+
+    .vendor-card p{
+        font-size:14px;
+    }
+
+    .vendor-price h4{
+        font-size:18px;
+    }
+
+}

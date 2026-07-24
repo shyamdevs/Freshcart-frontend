@@ -1,0 +1,277 @@
+/* ==========================
+   Featured Category Section
+========================== */
+
+.featured-category-section {
+  width: 90%;
+  margin: 70px auto;
+  padding: 0;
+}
+
+.featured-category-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.featured-category-top h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #21313c;
+  margin: 0;
+}
+
+/* ==========================
+   Swiper
+========================== */
+
+.swiper {
+  width: 100%;
+  padding: 10px 5px 40px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+/* ==========================
+   Category Card
+========================== */
+
+.category-card {
+  width: 100%;
+  min-height: 250px;
+  background: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  transition: all .35s ease;
+
+  overflow: hidden;
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+
+  border-color: #0aad0a;
+
+  box-shadow: 0 15px 35px rgba(0,0,0,.08);
+}
+
+.category-image {
+  width: 130px;
+  height: 130px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  transition: .4s;
+}
+
+.category-card:hover img {
+  transform: scale(1.08);
+}
+
+.category-card h5 {
+  margin-top: 25px;
+  margin-bottom: 0;
+
+  font-size: 17px;
+  font-weight: 600;
+  color: #3d4f58;
+
+  text-align: center;
+
+  line-height: 25px;
+
+  padding: 0 12px;
+}
+
+/* ==========================
+   Navigation Buttons
+========================== */
+/* Navigation Buttons */
+
+.navigation-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.custom-prev,
+.custom-next {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #f0f3f2;
+    color: #5c6c75;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    font-size: 18px;
+}
+
+.custom-prev:hover,
+.custom-next:hover {
+    background: #0aad0a;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.custom-prev svg,
+.custom-next svg {
+    font-size: 16px;
+}
+
+/* Remove Swiper default arrows */
+
+.swiper-button-prev1::after,
+.swiper-button-next2::after {
+    display: none ;
+}
+
+/* ==========================
+   Desktop
+========================== */
+
+@media (max-width:1200px) {
+
+  .featured-category-section {
+    width: 95%;
+  }
+
+  .featured-category-top h2 {
+    font-size: 30px;
+  }
+
+  .category-card {
+    min-height: 230px;
+  }
+
+}
+
+/* ==========================
+   Tablet
+========================== */
+
+@media (max-width:992px) {
+
+  .featured-category-section {
+    width: 96%;
+  }
+
+  .featured-category-top h2 {
+    font-size: 28px;
+  }
+
+  .category-card {
+    min-height: 220px;
+  }
+
+  .category-image {
+    width: 115px;
+    height: 115px;
+  }
+
+  .category-card h5 {
+    font-size: 16px;
+  }
+
+}
+
+/* ==========================
+   Mobile
+========================== */
+
+@media (max-width:768px) {
+
+  .featured-category-top {
+  
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .navigation-buttons {
+    align-self: flex-end;
+  }
+
+  .featured-category-top h2 {
+    font-size: 25px;
+  }
+
+  .category-card {
+    min-height: 200px;
+  }
+
+  .category-image {
+    width: 95px;
+    height: 95px;
+  }
+
+  .category-card h5 {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+}
+
+/* ==========================
+   Small Mobile
+========================== */
+
+@media (max-width:480px) {
+
+  .featured-category-section {
+    width: 94%;
+    margin: 50px auto;
+  }
+
+  .featured-category-top h2 {
+    font-size: 22px;
+  }
+
+  .navigation-buttons {
+    gap: 10px;
+  }
+
+  .custom-prev,
+  .custom-next {
+    width: 36px ;
+    height: 36px ;
+  }
+
+  .category-card {
+    min-height: 180px;
+  }
+
+  .category-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .category-card h5 {
+    font-size: 14px;
+  }
+
+}

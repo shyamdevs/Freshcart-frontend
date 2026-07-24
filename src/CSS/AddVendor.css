@@ -1,0 +1,168 @@
+/* ===========================
+   Add Vendor Page
+=========================== */
+
+.addvendor {
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.addvendor h2 {
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: #212529;
+    text-align: center;
+}
+
+/* ===========================
+   Form
+=========================== */
+
+.addvendor form {
+    width: 100%;
+}
+
+.addvendor input,
+.addvendor textarea {
+    width: 100%;
+    padding: 13px 15px;
+    margin-bottom: 18px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: .3s;
+    box-sizing: border-box;
+}
+
+.addvendor textarea {
+    resize: none;
+    min-height: 100px;
+}
+
+.addvendor input:focus,
+.addvendor textarea:focus {
+    border-color: #0aad0a;
+    box-shadow: 0 0 6px rgba(10,173,10,.25);
+}
+
+/* ===========================
+   Button
+=========================== */
+
+.addvendor button {
+    width: 100%;
+    padding: 14px;
+    background: #0aad0a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.addvendor button:hover {
+    background: #088808;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media (max-width:992px){
+
+    .addvendor{
+        max-width:90%;
+        padding:25px;
+    }
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width:768px){
+
+    .addvendor{
+
+        margin:20px auto;
+
+        padding:20px;
+
+    }
+
+    .addvendor h2{
+
+        font-size:24px;
+
+    }
+
+    .addvendor input,
+    .addvendor textarea{
+
+        padding:12px;
+
+        font-size:14px;
+
+    }
+
+    .addvendor button{
+
+        font-size:16px;
+
+        padding:13px;
+
+    }
+
+}
+
+/* ===========================
+   Small Mobile
+=========================== */
+
+@media (max-width:480px){
+
+    .addvendor{
+
+        padding:15px;
+
+        border-radius:8px;
+
+    }
+
+    .addvendor h2{
+
+        font-size:22px;
+
+        margin-bottom:20px;
+
+    }
+
+    .addvendor input,
+    .addvendor textarea{
+
+        font-size:13px;
+
+        padding:10px;
+
+        margin-bottom:15px;
+
+    }
+
+    .addvendor button{
+
+        font-size:15px;
+
+        padding:12px;
+
+    }
+
+}
