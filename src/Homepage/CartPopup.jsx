@@ -8,20 +8,35 @@ import {
 } from "react-icons/fa";
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CartPopup({ closePopup }) {
-
+const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const [products, setProducts] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
-  useEffect(() => {
-    getProducts();
-     getAddress();
-  }, []);
+useEffect(() => {
+
+  if (!user) {
+    Swal.fire({
+      icon: "warning",
+      title: "Login Required",
+      text: "Please login first.",
+    }).then(() => {
+      closePopup();
+      navigate("/Signup");
+    });
+
+    return;
+  }
+
+  getProducts();
+  getAddress();
+
+}, []);
 
   function getProducts() {
-    axios.get("https://freshcart-backend-theta.vercel.app/cart").then((res) => {
+    axios.get("https://freshcart-backend-orpin.vercel.app/cart").then((res) => {
       if (res.data.status) {
 
         setProducts(
@@ -59,7 +74,7 @@ export default function CartPopup({ closePopup }) {
   };
 
   const deletecart = (id) => {
-    axios.post("https://freshcart-backend-theta.vercel.app/deleteshopcart", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/deleteshopcart", {
       _id: id,
     })
       .then((res) => {
@@ -122,7 +137,7 @@ export default function CartPopup({ closePopup }) {
         orderPlaced = true;
 
 
-        axios.post("https://freshcart-backend-theta.vercel.app/addorder", {
+        axios.post("https://freshcart-backend-orpin.vercel.app/addorder", {
 
           products: products.map((item) => ({
 
@@ -188,7 +203,7 @@ export default function CartPopup({ closePopup }) {
 
 const orderNumber = "#" + Math.floor(Math.random() * 90000 + 10000);
 
-          axios.post("https://freshcart-backend-theta.vercel.app/addorder", {
+          axios.post("https://freshcart-backend-orpin.vercel.app/addorder", {
 
             products: products.map((item) => ({
 
@@ -252,7 +267,7 @@ const orderNumber = "#" + Math.floor(Math.random() * 90000 + 10000);
 // address--------------------
 function getAddress() {
 
-  axios.post("https://freshcart-backend-theta.vercel.app/getaddress", {
+  axios.post("https://freshcart-backend-orpin.vercel.app/getaddress", {
 
     userId: user._id
 

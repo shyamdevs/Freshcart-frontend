@@ -20,7 +20,7 @@ export default function PaymentMethod() {
 
         axios.post(
 
-            "https://freshcart-backend-theta.vercel.app/getpayment",
+            "https://freshcart-backend-orpin.vercel.app/getpayment",
 
             {
 
@@ -70,7 +70,7 @@ export default function PaymentMethod() {
 
                 axios.post(
 
-                    "https://freshcart-backend-theta.vercel.app/deletepayment",
+                    "https://freshcart-backend-orpin.vercel.app/deletepayment",
 
                     {
 

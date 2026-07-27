@@ -69,7 +69,7 @@ export default function AddPayment({
 
         axios.post(
 
-            "https://freshcart-backend-theta.vercel.app/addpayment",
+            "https://freshcart-backend-orpin.vercel.app/addpayment",
 
             paymentData
 

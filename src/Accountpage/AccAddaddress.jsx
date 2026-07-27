@@ -27,7 +27,7 @@ export default function AddressPopup({ closePopup }) {
 
     e.preventDefault();
 
-    axios.post("https://freshcart-backend-theta.vercel.app/addaddress", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/addaddress", {
 
       addressdata: {
 

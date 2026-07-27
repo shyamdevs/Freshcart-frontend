@@ -17,7 +17,7 @@ setsignindata({...signindata, [e.target.name]:e.target.value})
 
 const savedata = (e) => {
     e.preventDefault();
-    axios.post("https://freshcart-backend-theta.vercel.app/signin", { signindata }).then((res) => {
+    axios.post("https://freshcart-backend-orpin.vercel.app/signin", { signindata }).then((res) => {
       if (res.data.status) {
             localStorage.setItem(
         "user",

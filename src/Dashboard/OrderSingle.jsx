@@ -43,7 +43,7 @@ export default function OrderSingle() {
 
     function getOrder() {
 
-        axios.post("https://freshcart-backend-theta.vercel.app/ordersingle", {
+        axios.post("https://freshcart-backend-orpin.vercel.app/ordersingle", {
 
             orderNo: orderNo
 
@@ -68,7 +68,7 @@ export default function OrderSingle() {
     // save -------------status ----------
     function saveStatus() {
 
-        axios.post("https://freshcart-backend-theta.vercel.app/updateorderstatus", {
+        axios.post("https://freshcart-backend-orpin.vercel.app/updateorderstatus", {
 
             orderNo: order.orderNo,
 

@@ -21,7 +21,7 @@ const [currentPage, setCurrentPage] = useState(1);
 const usersPerPage = 10;
 
     function getusers() {
-        axios.get("https://freshcart-backend-theta.vercel.app/allusers").then((res) => {
+        axios.get("https://freshcart-backend-orpin.vercel.app/allusers").then((res) => {
             if (res.data.status) {
                 setusers(res.data.myallusers)
             }
@@ -39,7 +39,7 @@ const usersPerPage = 10;
     // delete customer --------
 
      let dltcustomer = (dltcus) => {
-    axios.post("https://freshcart-backend-theta.vercel.app/deletecustomer", { dltcus }).then((res) => {
+    axios.post("https://freshcart-backend-orpin.vercel.app/deletecustomer", { dltcus }).then((res) => {
       if (res.data.status) {
 
         Swal.fire({

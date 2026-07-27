@@ -20,7 +20,7 @@ export default function Navbar() {
   }, []);
 
   const getWishlistCount = () => {
-    axios.get("https://freshcart-backend-theta.vercel.app/wishlistcount")
+    axios.get("https://freshcart-backend-orpin.vercel.app/wishlistcount")
       .then((res) => {
         if (res.data.status) {
           setWishlistCount(res.data.count)
@@ -30,7 +30,7 @@ export default function Navbar() {
   };
 
   const getCartCount = () => {
-    axios.get("https://freshcart-backend-theta.vercel.app/cartcount")
+    axios.get("https://freshcart-backend-orpin.vercel.app/cartcount")
       .then((res) => {
         if (res.data.status) {
           setCartCount(res.data.count)
@@ -51,7 +51,7 @@ export default function Navbar() {
     }
 
     let res = await axios.get(
-      `https://freshcart-backend-theta.vercel.app/searchproduct?keyword=${value}`
+      `https://freshcart-backend-orpin.vercel.app/searchproduct?keyword=${value}`
     );
 
     if (res.data.status) {

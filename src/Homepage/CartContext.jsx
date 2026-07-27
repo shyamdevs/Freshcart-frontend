@@ -8,7 +8,7 @@ export default function CartProvider({ children }) {
   const [wishlistCount, setWishlistCount] = useState(0);
 
   const getCartCount = () => {
-    axios.get("https://freshcart-backend-theta.vercel.app/cartcount").then((res) => {
+    axios.get("https://freshcart-backend-orpin.vercel.app/cartcount").then((res) => {
       if (res.data.status) {
         setCartCount(res.data.count);
       }
@@ -16,7 +16,7 @@ export default function CartProvider({ children }) {
   };
 
   const getWishlistCount = () => {
-    axios.get("https://freshcart-backend-theta.vercel.app/wishlistcount").then((res) => {
+    axios.get("https://freshcart-backend-orpin.vercel.app/wishlistcount").then((res) => {
       if (res.data.status) {
         setWishlistCount(res.data.count);
       }

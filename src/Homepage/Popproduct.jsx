@@ -15,7 +15,7 @@ const Popproduct = () => {
   let [allproductvalue, setproduct] = useState([])
 
   function getproduct() {
-    axios.get("https://freshcart-backend-theta.vercel.app/allproduct").then((res) => {
+    axios.get("https://freshcart-backend-orpin.vercel.app/allproduct").then((res) => {
       if (res.data.status) {
         setproduct(res.data.myallproduct)
       }
@@ -33,7 +33,7 @@ const Popproduct = () => {
 
   const addToCart = (item) => {
 
-    axios.post("https://freshcart-backend-theta.vercel.app/addtocart", item)
+    axios.post("https://freshcart-backend-orpin.vercel.app/addtocart", item)
 
       .then((res) => {
 
@@ -69,7 +69,7 @@ const Popproduct = () => {
  const user = JSON.parse(localStorage.getItem("user"));
   const addWishlist = (item) => {
 
-    axios.post("https://freshcart-backend-theta.vercel.app/addwishlist", {...item, email: user.email})
+    axios.post("https://freshcart-backend-orpin.vercel.app/addwishlist", {...item, email: user.email})
       .then((res) => {
 
         if (res.data.status) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import { Link, useNavigate } from "react-router-dom";
 
 import { FaTrash } from "react-icons/fa";
 import "../CSS/Wishlist.css"
@@ -10,15 +10,30 @@ import Footer from './Footer';
 
 export default function Wishlist() {
 
-  const user = JSON.parse(localStorage.getItem("user"));
+const navigate = useNavigate();
+const user = JSON.parse(localStorage.getItem("user"));
 
   const [products, setProducts] = useState([]);
-  useEffect(() => {
-    getProducts();
-  }, []);
+ useEffect(() => {
+
+  if (!user) {
+    Swal.fire({
+      icon: "warning",
+      title: "Login Required",
+      text: "Please login first.",
+    }).then(() => {
+      navigate("/Signup");
+    });
+
+    return;
+  }
+
+  getProducts();
+
+}, []);
 
   function getProducts() {
-    axios.post("https://freshcart-backend-theta.vercel.app/wishlist", { email: user.email})
+    axios.post("https://freshcart-backend-orpin.vercel.app/wishlist", { email: user.email})
       .then((res) => {
         if (res.data.status) {
           setProducts(res.data.mywishlist);
@@ -29,7 +44,7 @@ export default function Wishlist() {
 
   const removeWishlist = (id) => {
 
-    axios.post("https://freshcart-backend-theta.vercel.app/deletewishlist", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/deletewishlist", {
       _id: id,
        email:user.email
     }).then((res) => {
@@ -47,7 +62,7 @@ export default function Wishlist() {
 
   const addToCart = (item) => {
 
-    axios.post("https://freshcart-backend-theta.vercel.app/addtocart", item)
+    axios.post("https://freshcart-backend-orpin.vercel.app/addtocart", item)
       .then((res) => {
 
         if (res.data.status) {
@@ -61,7 +76,7 @@ export default function Wishlist() {
           });
 
           // Wishlist se remove bhi kar do
-          axios.post("https://freshcart-backend-theta.vercel.app/deletewishlist", {
+          axios.post("https://freshcart-backend-orpin.vercel.app/deletewishlist", {
             _id: item._id,
              email: user.email
           });

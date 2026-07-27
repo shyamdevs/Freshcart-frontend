@@ -72,7 +72,7 @@ export default function ProductDetails() {
 
         axios.post(
 
-            "https://freshcart-backend-theta.vercel.app/addtocart",
+            "https://freshcart-backend-orpin.vercel.app/addtocart",
 
             product
 
@@ -118,7 +118,7 @@ export default function ProductDetails() {
 
         axios.post(
 
-            "https://freshcart-backend-theta.vercel.app/addwishlist",
+            "https://freshcart-backend-orpin.vercel.app/addwishlist",
 
            
            {  ...product, email: user.email}

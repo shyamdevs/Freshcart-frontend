@@ -19,7 +19,7 @@ const CategoryPage = () => {
   const go = useNavigate();
 
   function getallcategory() {
-    axios.get("https://freshcart-backend-theta.vercel.app/AllCategory").then((res) => {
+    axios.get("https://freshcart-backend-orpin.vercel.app/AllCategory").then((res) => {
       if (res.data.status) {
         setcategory(res.data.myallcategory)
       }
@@ -34,7 +34,7 @@ const CategoryPage = () => {
   let [allproduct, setAllproduct] = useState([]);
 
   function getproduct() {
-    axios.get("https://freshcart-backend-theta.vercel.app/allproduct").then((res) => {
+    axios.get("https://freshcart-backend-orpin.vercel.app/allproduct").then((res) => {
       if (res.data.status) {
         setAllproduct(res.data.myallproduct);
       }
@@ -53,7 +53,7 @@ const CategoryPage = () => {
   }, [])
   // delete category------------
   let dltcategory = (dltcat) => {
-    axios.post("https://freshcart-backend-theta.vercel.app/deletecategory", { dltcat }).then((res) => {
+    axios.post("https://freshcart-backend-orpin.vercel.app/deletecategory", { dltcat }).then((res) => {
       if (res.data.status) {
 
         Swal.fire({

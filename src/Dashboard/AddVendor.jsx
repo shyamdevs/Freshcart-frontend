@@ -56,7 +56,7 @@ export default function AddVendor() {
         return;   // <-- Function yahin ruk jayega
     }
 
-    axios.post("https://freshcart-backend-theta.vercel.app/addvendor", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/addvendor", {
         vendorvalue
     })
     .then((res) => {

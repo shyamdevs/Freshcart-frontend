@@ -21,7 +21,7 @@ const go = useNavigate();
     e.preventDefault();
 
     axios.post(
-        "https://freshcart-backend-theta.vercel.app/updatecategory",
+        "https://freshcart-backend-orpin.vercel.app/updatecategory",
         {categoryvalue}
     ).then((res) => {
 

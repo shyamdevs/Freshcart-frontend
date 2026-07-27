@@ -17,7 +17,7 @@ setalldata({...alldata, [e.target.name]:e.target.value})
 
 let savedata=(e)=>{
 e.preventDefault();
-axios.post("https://freshcart-backend-theta.vercel.app/signup", {alldata}).then(()=>{
+axios.post("https://freshcart-backend-orpin.vercel.app/signup", {alldata}).then(()=>{
    go("/Signin")
 })
 }

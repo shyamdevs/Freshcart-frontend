@@ -51,7 +51,7 @@ export default function ReviewPopup({
 
         axios.post(
 
-            "https://freshcart-backend-theta.vercel.app/addreview",
+            "https://freshcart-backend-orpin.vercel.app/addreview",
 
             reviewData
 

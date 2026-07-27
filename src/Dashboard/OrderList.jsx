@@ -29,7 +29,7 @@ const location = useLocation();
 
     function getOrders() {
 
-        axios.get("https://freshcart-backend-theta.vercel.app/orders").then((res) => {
+        axios.get("https://freshcart-backend-orpin.vercel.app/orders").then((res) => {
 
             if (res.data.status) {
 

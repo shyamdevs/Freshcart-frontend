@@ -17,7 +17,7 @@ export default function Editpro() {
 
   useEffect(() => {
 
-    axios.get("https://freshcart-backend-theta.vercel.app/allvendor")
+    axios.get("https://freshcart-backend-orpin.vercel.app/allvendor")
 
         .then((res) => {
 
@@ -67,7 +67,7 @@ export default function Editpro() {
     const updatedata = (e) => {
         e.preventDefault();
 
-        axios.post("https://freshcart-backend-theta.vercel.app/updateproduct", { productvalue }).then((res) => {
+        axios.post("https://freshcart-backend-orpin.vercel.app/updateproduct", { productvalue }).then((res) => {
             if (res.data.status) {
                 Swal.fire({
                     icon: "success",

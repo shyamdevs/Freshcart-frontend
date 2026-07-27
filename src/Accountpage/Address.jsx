@@ -18,7 +18,7 @@ export default function Address() {
 
 
 
-    axios.post("https://freshcart-backend-theta.vercel.app/getaddress", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/getaddress", {
 
       userId: user._id
 
@@ -38,7 +38,7 @@ export default function Address() {
 
   const setDefaultAddress = (id) => {
 
-    axios.post("https://freshcart-backend-theta.vercel.app/setdefaultaddress", {
+    axios.post("https://freshcart-backend-orpin.vercel.app/setdefaultaddress", {
 
         userId: user._id,
 
@@ -76,7 +76,7 @@ export default function Address() {
 
       if (result.isConfirmed) {
 
-        axios.post("https://freshcart-backend-theta.vercel.app/deleteaddress", {
+        axios.post("https://freshcart-backend-orpin.vercel.app/deleteaddress", {
 
           _id: id
 

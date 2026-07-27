@@ -45,7 +45,7 @@ export default function EditReview() {
 
         axios.post(
 
-            "https://freshcart-backend-theta.vercel.app/updatereview",
+            "https://freshcart-backend-orpin.vercel.app/updatereview",
 
             reviewData
 

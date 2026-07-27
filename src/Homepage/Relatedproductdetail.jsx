@@ -25,7 +25,7 @@ export default function RelatedProducts({ category, currentId }) {
 
     function getRelatedProducts() {
 
-        axios.get("https://freshcart-backend-theta.vercel.app/allproduct")
+        axios.get("https://freshcart-backend-orpin.vercel.app/allproduct")
             .then((res) => {
 
                 if (res.data.status) {
@@ -57,7 +57,7 @@ export default function RelatedProducts({ category, currentId }) {
 const addToCart = (product) => {
 
     axios.post(
-        "https://freshcart-backend-theta.vercel.app/addtocart",
+        "https://freshcart-backend-orpin.vercel.app/addtocart",
         product
     )
     .then((result) => {

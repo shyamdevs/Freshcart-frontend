@@ -23,7 +23,7 @@ const navigate = useNavigate();
     const getReviews = () => {
 
         axios.post(
-            "https://freshcart-backend-theta.vercel.app/getreview",
+            "https://freshcart-backend-orpin.vercel.app/getreview",
             {
                 productId
             }
@@ -62,7 +62,7 @@ const navigate = useNavigate();
 
                 axios.post(
 
-                    "https://freshcart-backend-theta.vercel.app/deletereview",
+                    "https://freshcart-backend-orpin.vercel.app/deletereview",
 
                     {
                         id
