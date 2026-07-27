@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -16,7 +16,7 @@ import SellerInfo from "./SellerInfo";
 import "../CSS/ProductDetails.css";
 
 export default function ProductDetails() {
-
+const navigate = useNavigate();
     const location = useLocation();
 
     const product = location.state?.product;
@@ -24,7 +24,7 @@ export default function ProductDetails() {
     const [selectedImage, setSelectedImage] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState("details");
-
+ const user = JSON.parse(localStorage.getItem("user"));
     useEffect(() => {
 
         if (product) {
@@ -68,94 +68,95 @@ export default function ProductDetails() {
     // Add To Cart
     // ==========================
 
-    const addToCart = () => {
+   const addToCart = () => {
 
-        axios.post(
+    const user = JSON.parse(localStorage.getItem("user"));
 
-            "https://freshcart-backend-orpin.vercel.app/addtocart",
-
-            product
-
-        )
-
-        .then((result) => {
-
-            if (result.data.status) {
-
-                Swal.fire({
-
-                    title: "Added!",
-                    text: "Product added to cart",
-                    icon: "success",
-                    timer: 1500,
-                    showConfirmButton: false
-
-                });
-
-            }
-
-            else {
-
-                Swal.fire({
-
-                    title: "Already Added!",
-                    text: result.data.message,
-                    icon: "warning"
-
-                });
-
-            }
-
+    if (!user) {
+        Swal.fire({
+            icon: "warning",
+            title: "Login Required",
+            text: "Please login first to add products to your cart.",
+            confirmButtonColor: "#0aad0a",
+        }).then(() => {
+            navigate("/Signin");
         });
 
-    };
+        return;
+    }
+
+    axios.post(
+        "https://freshcart-backend-orpin.vercel.app/addtocart",
+        {
+            ...product,
+            email: user.email,
+        }
+    )
+    .then((result) => {
+        if (result.data.status) {
+            Swal.fire({
+                title: "Added!",
+                text: "Product added to cart",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false,
+            });
+        } else {
+            Swal.fire({
+                title: "Already Added!",
+                text: result.data.message,
+                icon: "warning",
+            });
+        }
+    });
+};
 
     // ==========================
     // Wishlist
     // ==========================
- const user = JSON.parse(localStorage.getItem("user"));
-    const addToWishlist = () => {
 
-        axios.post(
+   const addToWishlist = () => {
 
-            "https://freshcart-backend-orpin.vercel.app/addwishlist",
+    const user = JSON.parse(localStorage.getItem("user"));
 
-           
-           {  ...product, email: user.email}
-
-        )
-
-        .then((result) => {
-
-            if (result.data.status) {
-
-                Swal.fire({
-
-                    title: "Added!",
-                    text: "Product added to wishlist",
-                    icon: "success",
-                    timer: 1500,
-                    showConfirmButton: false
-
-                });
-
-            }
-
-            else {
-
-                Swal.fire({
-
-                    title: "Already Added!",
-                    text: result.data.msg,
-                    icon: "warning"
-
-                });
-
-            }
-
+    if (!user) {
+        Swal.fire({
+            icon: "warning",
+            title: "Login Required",
+            text: "Please login first to add products to your wishlist.",
+            confirmButtonColor: "#0aad0a",
+        }).then(() => {
+            navigate("/Signin");
         });
 
-    };
+        return;
+    }
+
+    axios.post(
+        "https://freshcart-backend-orpin.vercel.app/addwishlist",
+        {
+            ...product,
+            email: user.email,
+        }
+    )
+    .then((result) => {
+        if (result.data.status) {
+            Swal.fire({
+                title: "Added!",
+                text: "Product added to wishlist",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false,
+            });
+        } else {
+            Swal.fire({
+                title: "Already Added!",
+                text: result.data.msg,
+                icon: "warning",
+            });
+        }
+    });
+};
 
     return (
 

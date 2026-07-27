@@ -198,7 +198,7 @@ export default function DailyBest() {
 
                             <button className="cart-btn">
 
-                                ＋ Add to cart
+                               comming soon.......
 
                             </button>
 

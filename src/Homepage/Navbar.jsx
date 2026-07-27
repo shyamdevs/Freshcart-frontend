@@ -4,7 +4,7 @@ import logo from "../Images/freshcart-logo.svg"
 import { Link } from "react-router-dom";
 import CartPopup from "./CartPopup";
 import axios from "axios";
-
+import Swal from "sweetalert2";
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
   const [openAccount, setOpenAccount] = useState(false);
@@ -60,40 +60,88 @@ export default function Navbar() {
 
   };
   // location ----------------------------------
+const getLocation = async () => {
+  if (!navigator.geolocation) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Geolocation is not supported by your browser.",
+      confirmButtonColor: "#0aad0a",
+    });
+    return;
+  }
 
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      alert("Geolocation is not supported");
-      return;
+  try {
+    if (navigator.permissions) {
+      const permission = await navigator.permissions.query({
+        name: "geolocation",
+      });
+
+      if (permission.state === "denied") {
+      Swal.fire({
+  icon: "warning",
+  title: "Location Permission Blocked",
+  html: `
+    <p>Please enable location permission.</p>
+    <ol style="text-align:left;">
+      <li>Click the 🔒 icon in the address bar.</li>
+      <li>Change <b>Location</b> to <b>Allow</b>.</li>
+      <li>Refresh the page.</li>
+    </ol>
+  `,
+  confirmButtonColor: "#0aad0a",
+});
+        return;
+      }
     }
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { latitude, longitude } = position.coords;
 
-        try {
-          const res = await axios.get(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-          );
+        const res = await axios.get(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+        );
 
-          const address = res.data.address;
+        const address = res.data.address;
 
-          setLocationName(
-            `${address.city || address.town || address.village}, ${address.state}`
-          );
-        } catch (err) {
-          console.log(err);
-        }
+        setLocationName(
+          `${address.city || address.town || address.village || address.hamlet || "Unknown"}, ${address.state || ""}`
+        );
       },
       (error) => {
-        alert("Location permission denied");
+        if (error.code === error.PERMISSION_DENIED) {
+          Swal.fire({
+            icon: "warning",
+            title: "Permission Denied",
+            text: "Please allow location access to detect your current location.",
+            confirmButtonColor: "#0aad0a",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Location Error",
+            text: "Unable to fetch your current location.",
+            confirmButtonColor: "#0aad0a",
+          });
+        }
       }
     );
-  };
+  } catch (err) {
+    console.log(err);
 
-  useEffect(() => {
-    getLocation();
-  }, []);
+    Swal.fire({
+      icon: "error",
+      title: "Something went wrong",
+      text: "Unable to get your location.",
+      confirmButtonColor: "#0aad0a",
+    });
+  }
+};
+
+  // useEffect(() => {
+  //   getLocation();
+  // }, []);
 
 
 
