@@ -252,7 +252,7 @@ const getLocation = async () => {
 
             {/* Icons */}
             <div className="nav-icons">
-              <a href="/Wishlist" className="icon-link">
+              <Link to="/Wishlist" className="icon-link">
                 <svg width="26" height="26" viewBox="0 0 24 24">
                   <path
                     d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"
@@ -262,9 +262,9 @@ const getLocation = async () => {
                   />
                 </svg>
                 <span className="badge">  {wishlistCount}</span>
-              </a>
+              </Link>
 
-              <a href="/Signup" className="icon-link">
+              <Link to="/Signup" className="icon-link">
                 <svg width="26" height="26" viewBox="0 0 24 24">
                   <path
                     d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
@@ -274,7 +274,7 @@ const getLocation = async () => {
                   />
                   <circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
                 </svg>
-              </a>
+              </Link>
 
               <button
                 className="icon-link"
@@ -402,7 +402,7 @@ const getLocation = async () => {
                 {searchData.map((item) => (
                   <Link
                     key={item._id}
-                    to="/ProductDetails"
+                    to="/productdetails"
                     state={{ product: item }}
                     className="search-item"
                     onClick={() => {
