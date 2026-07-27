@@ -11,6 +11,7 @@ export default function ReviewShow({ productId }) {
     const [showPopup, setShowPopup] = useState(false);
     const [reviews, setReviews] = useState([]);
     const [editData, setEditData] = useState(null);
+    const user = JSON.parse(localStorage.getItem("user"));
 const navigate = useNavigate();
     useEffect(() => {
 
@@ -177,23 +178,35 @@ const editReview = (item) => {
 
                     </p>
 
-                    <div className="customer-review-buttons">
+                  <div className="customer-review-buttons">
 
-                        <button
-                            className="customer-edit-btn"
-                            onClick={()=>editReview(item)}
-                        >
-                            ✏ Edit
-                        </button>
+    <button className="customer-like-btn">
+        👍 Like
+    </button>
 
-                        <button
-                            className="customer-delete-btn"
-                            onClick={()=>deleteReview(item._id)}
-                        >
-                            🗑 Delete
-                        </button>
+    <button className="customer-reply-btn">
+        💬 Reply
+    </button>
 
-                    </div>
+    {user && user.email === item.email && (
+        <>
+            <button
+                className="customer-edit-btn"
+                onClick={() => editReview(item)}
+            >
+                ✏ Edit
+            </button>
+
+            <button
+                className="customer-delete-btn"
+                onClick={() => deleteReview(item._id)}
+            >
+                🗑 Delete
+            </button>
+        </>
+    )}
+
+</div>
 
                 </div>
 
