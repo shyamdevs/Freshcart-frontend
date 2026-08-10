@@ -33,7 +33,8 @@ export default function Dashsidebar() {
       {/* Mobile Header */}
 
       <div className="mobile-header"  style={{ justifyContent:"space-between"}}>
-        <img src={logo} alt="logo"/>
+       <Link to="/Home">
+        <img src={logo} alt="logo"/></Link>
 
         <button onClick={() => setOpen(!open)}>
           {open ? <FiX /> : <FiMenu />}
@@ -44,7 +45,7 @@ export default function Dashsidebar() {
 
       <aside className={`sidebar ${open ? "active" : ""}`}>
         <div className="logo">
-          <Link to="/">
+          <Link to="/Home">
             <img src={logo} alt="logo" /></Link>
         </div>
 

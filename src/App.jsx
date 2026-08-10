@@ -61,10 +61,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/Signin' element={<Signin />} />
-          <Route path='/Signup' element={<Signup />} />
+          <Route path='/' element={<Signup />} />
           <Route path='/Popularproduct' element={<Popproduct />} />
           <Route path='/ForgotPassword' element={<ForgotPassword />} />
-          <Route path='/' element={<Home />} />
+          <Route path='/Home' element={<Home />} />
           <Route path='/Cart' element={<CartPopup />} />
           <Route path='/Wishlist' element={<Wishlist/>}/>
 

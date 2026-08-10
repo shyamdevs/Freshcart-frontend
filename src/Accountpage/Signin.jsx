@@ -28,7 +28,7 @@ const savedata = (e) => {
           text: "Login success",
           icon: "success"
         });
-        go("/")
+        go("/Home")
       }
       else {
         Swal.fire({
@@ -113,7 +113,7 @@ const savedata = (e) => {
           </button>
 
           <p className="login-signup-text">
-            Don’t have an account? <Link to="/Signup">Sign Up</Link>
+            Don’t have an account? <Link to="/">Sign Up</Link>
           </p>
         </form>
       </div>

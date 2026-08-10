@@ -170,7 +170,7 @@ const getLocation = async () => {
         <div className="main-header">
           <div className="nav-wrapper main-header-inner">
             {/* Logo */}
-            <Link to="/" className="brand-logo">
+            <Link to="/Home" className="brand-logo">
               <img src={logo} alt="logo" />
             </Link>
 
@@ -264,7 +264,7 @@ const getLocation = async () => {
                 <span className="badge">  {wishlistCount}</span>
               </Link>
 
-              <Link to="/Signup" className="icon-link">
+              <Link to="/" className="icon-link">
                 <svg width="26" height="26" viewBox="0 0 24 24">
                   <path
                     d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
@@ -351,7 +351,7 @@ const getLocation = async () => {
                   <div className="dropdown" style={{ position: "absolute" }}>
                     <Link to="/Signin">Sign In</Link>
 
-                    <Link to="/Signup">Sign Up</Link>
+                    <Link to="/">Sign Up</Link>
 
                     <Link to="/ForgotPassword">Forgot Password</Link>
                     <div className="sub-menu">
