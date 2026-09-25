@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Navbar.css";
-import logo from "../Images/freshcart-logo.svg"
+import logo from "../Images/freshcart-logo.svg";
 import { Link } from "react-router-dom";
 import CartPopup from "./CartPopup";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
   const [openAccount, setOpenAccount] = useState(false);
@@ -14,29 +15,56 @@ export default function Navbar() {
 
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
+
+  // ✅ 1. LocalStorage se logged-in user ka email extract karein
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userEmail = user?.email || localStorage.getItem("email");
+
   useEffect(() => {
     getWishlistCount();
     getCartCount();
-  }, []);
+  }, [userEmail]); // userEmail badalne par re-run hoga
 
+  // ✅ 2. Wishlist Count Fetch (User Specific)
   const getWishlistCount = () => {
-    axios.get("https://freshcart-backend-orpin.vercel.app/wishlistcount")
+    if (!userEmail) {
+      setWishlistCount(0);
+      return;
+    }
+
+    axios
+      .post("https://freshcart-backend-orpin.vercel.app/wishlistcount", {
+        email: userEmail,
+      })
       .then((res) => {
         if (res.data.status) {
-          setWishlistCount(res.data.count)
-
+          setWishlistCount(res.data.count);
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
-  const getCartCount = () => {
-    axios.get("https://freshcart-backend-orpin.vercel.app/cartcount")
-      .then((res) => {
+  // ✅ 3. Cart Count Fetch (User Specific)
+ const getCartCount = () => {
+    if (!userEmail) {
+        setCartCount(0);
+        return;
+    }
+
+    axios.post("https://freshcart-backend-orpin.vercel.app/cartcount", {
+        email: userEmail
+    })
+    .then((res) => {
         if (res.data.status) {
-          setCartCount(res.data.count)
+            setCartCount(res.data.count);
         }
-      });
-  };
+    })
+    .catch((err) => {
+        console.log("Cart Count Error:", err);
+    });
+};
+
+  
   //search -------------------------------------------------------------
   const [search, setSearch] = useState("");
   const [searchData, setSearchData] = useState([]);
@@ -139,9 +167,7 @@ const getLocation = async () => {
   }
 };
 
-  // useEffect(() => {
-  //   getLocation();
-  // }, []);
+ 
 
 
 

@@ -20,7 +20,7 @@ export default function Accdash() {
 
   function logout() {
     localStorage.removeItem("user");
-    navigate("/Signup");
+    navigate("/");
 
   }
 

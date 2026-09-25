@@ -22,7 +22,7 @@ const user = JSON.parse(localStorage.getItem("user"));
       title: "Login Required",
       text: "Please login first.",
     }).then(() => {
-      navigate("/Signup");
+      navigate("/");
     });
 
     return;

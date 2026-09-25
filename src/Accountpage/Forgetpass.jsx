@@ -24,7 +24,7 @@ axios.post("https://freshcart-backend-orpin.vercel.app/forgetpass", {forgetpass}
           text: "password change success",
           icon: "success"
         });
-        go("/Signup")
+        go("/")
       }
       else {
         Swal.fire({

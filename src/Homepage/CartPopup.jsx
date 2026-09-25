@@ -24,7 +24,7 @@ useEffect(() => {
       text: "Please login first.",
     }).then(() => {
       closePopup();
-      navigate("/Signup");
+      navigate("/");
     });
 
     return;

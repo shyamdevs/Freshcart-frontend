@@ -180,7 +180,7 @@ const deleteAccount = () => {
             text: "Account Deleted Successfully"
           });
 
-          go("/Signup");
+          go("/");
 
         } else {
 
