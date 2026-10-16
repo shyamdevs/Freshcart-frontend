@@ -13,33 +13,85 @@ export default function Signin() {
   const [showPassword, setShowPassword] = useState(false);
   const go = useNavigate();
 
-  const signinvalue = (e) => {
-    setsignindata({ ...signindata, [e.target.name]: e.target.value });
-  };
+ 
+const signinvalue = (e) => {
+  const { name, value } = e.target;
 
-  const savedata = async (e) => {
-    e.preventDefault();
-    if (!signindata.email || !signindata.password) {
-      Swal.fire({ icon: 'warning', text: 'Please fill in all fields.' });
+  setsignindata((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
+
+const savedata = async (e) => {
+  e.preventDefault();
+
+  const email = signindata.email.trim().toLowerCase();
+  const password = signindata.password;
+
+  if (!email || !password) {
+    Swal.fire({
+      icon: 'warning',
+      text: 'Please enter your email and password.',
+    });
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const res = await axiosInstance.post('/signin', {
+      signindata: { email, password },
+    });
+
+    if (!res.data?.status || !res.data?.token) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: res.data?.message || 'Unable to sign in. Please try again.',
+      });
       return;
     }
-    setLoading(true);
-    try {
-      const res = await axiosInstance.post('/signin', { signindata });
-      if (res.data.status) {
-        setToken(res.data.token);
-        localStorage.setItem('user', JSON.stringify(res.data.user));
-        Swal.fire({ text: 'Login success', icon: 'success', timer: 1200, showConfirmButton: false });
-        setTimeout(() => go('/Home'), 1200);
-      } else {
-        Swal.fire({ icon: 'error', text: res.data.message || 'Invalid credentials!' });
-      }
-    } catch (err) {
-      Swal.fire({ icon: 'error', text: 'Network error. Please try again.' });
-    } finally {
-      setLoading(false);
-    }
-  };
+
+    setToken(res.data.token);
+    localStorage.setItem('user', JSON.stringify(res.data.user));
+
+    await Swal.fire({
+      icon: 'success',
+      text: 'Login successful!',
+      timer: 1200,
+      showConfirmButton: false,
+    });
+
+    go('/Home', { replace: true });
+  } catch (err) {
+    const status = err.response?.status;
+    const serverMessage = err.response?.data?.message;
+
+    const message =
+      serverMessage ||
+      (err.code === 'ERR_NETWORK'
+        ? 'Cannot connect to the server. Check your API URL and backend status.'
+        : status === 401
+          ? 'Invalid email or password.'
+          : 'Something went wrong. Please try again.');
+
+    console.error('Signin error:', {
+      status,
+      message,
+      response: err.response?.data,
+      code: err.code,
+    });
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Failed',
+      text: message,
+    });
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>
