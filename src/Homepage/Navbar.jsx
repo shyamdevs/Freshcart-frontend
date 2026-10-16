@@ -435,9 +435,9 @@ const getLocation = async () => {
                   </div>
                 )}
               </li>
-              {user?.isAdmin && (
+            
                 <li><Link to="/dash">Dashboard</Link></li>
-              )}
+              
               <li><a href="#">Docs</a></li>
             </ul>
           </div>

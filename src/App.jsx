@@ -81,21 +81,21 @@ function App() {
         </Route>
 
         {/* Admin-only routes */}
-        <Route path="/dashboard" element={<ProtectedRoute adminOnly><Dashsidebar /></ProtectedRoute>} />
-        <Route path="/dash" element={<ProtectedRoute adminOnly><Dashboard /></ProtectedRoute>} />
-        <Route path="/products" element={<ProtectedRoute adminOnly><Products /></ProtectedRoute>} />
-        <Route path="/Addproduct" element={<ProtectedRoute adminOnly><Addproduct /></ProtectedRoute>} />
-        <Route path="/CategoryForm" element={<ProtectedRoute adminOnly><CategoryForm /></ProtectedRoute>} />
-        <Route path="/CategoryPage" element={<ProtectedRoute adminOnly><CategoryPage /></ProtectedRoute>} />
-        <Route path="/Customer" element={<ProtectedRoute adminOnly><Customer /></ProtectedRoute>} />
-        <Route path="/editproduct" element={<ProtectedRoute adminOnly><Editpro /></ProtectedRoute>} />
-        <Route path="/EditCategory" element={<ProtectedRoute adminOnly><Editcat /></ProtectedRoute>} />
-        <Route path="/Accdash" element={<ProtectedRoute adminOnly><Accdash /></ProtectedRoute>} />
-        <Route path="/AdminReviews" element={<ProtectedRoute adminOnly><AdminReviews /></ProtectedRoute>} />
-        <Route path="/orderlist" element={<ProtectedRoute adminOnly><AdminOrderList /></ProtectedRoute>} />
-        <Route path="/OrderSingle" element={<ProtectedRoute adminOnly><OrderSingle /></ProtectedRoute>} />
-        <Route path="/addvendor" element={<ProtectedRoute adminOnly><AddVendor /></ProtectedRoute>} />
-        <Route path="/sellervendor" element={<ProtectedRoute adminOnly><SellerVendor /></ProtectedRoute>} />
+        <Route path="/dashboard" element={<Dashsidebar />} />
+        <Route path="/dash" element={<Dashboard />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/Addproduct" element={<Addproduct />} />
+        <Route path="/CategoryForm" element={<CategoryForm />} />
+        <Route path="/CategoryPage" element={<CategoryPage /} />
+        <Route path="/Customer" element={<Customer />} />
+        <Route path="/editproduct" element={<Editpro />} />
+        <Route path="/EditCategory" element={<Editcat />} />
+        <Route path="/Accdash" element={<Accdash />} />
+        <Route path="/AdminReviews" element={<AdminReviews />} />
+        <Route path="/orderlist" element={<AdminOrderList />} />
+        <Route path="/OrderSingle" element={<OrderSingle />} />
+        <Route path="/addvendor" element={<AddVendor />} />
+        <Route path="/sellervendor" element={<SellerVendor />} />
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
