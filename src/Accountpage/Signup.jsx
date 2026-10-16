@@ -35,10 +35,27 @@ export default function Signup() {
         Swal.fire({ icon: 'error', text: res.data.message || 'Registration failed. Try again.' });
       }
     } catch (err) {
-      Swal.fire({ icon: 'error', text: 'Network error. Please try again.' });
-    } finally {
-      setLoading(false);
-    }
+  const message =
+    err.response?.data?.message ||
+    (err.code === 'ERR_NETWORK'
+      ? 'Cannot reach the server. Check your API URL and backend status.'
+      : err.message || 'Signup failed. Please try again.');
+
+  console.error('Signup error:', {
+    message,
+    status: err.response?.status,
+    response: err.response?.data,
+    code: err.code,
+  });
+
+  Swal.fire({
+    icon: 'error',
+    title: 'Registration Failed',
+    text: message,
+  });
+} finally {
+  setLoading(false);
+} 
   };
 
   return (
