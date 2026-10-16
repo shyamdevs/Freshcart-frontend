@@ -1,78 +1,90 @@
-import React, { useState } from "react";
-import forgotImg from "../Images/forgetpassword.svg";
-import "../CSS/Forgetpass.css";
-import axios from "axios";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import Signinnav from "./signinnav";
-import Footer from "../Homepage/Footer";
+import React, { useState } from 'react';
+import forgotImg from '../Images/forgetpassword.svg';
+import '../CSS/Forgetpass.css';
+import Swal from 'sweetalert2';
+import { useNavigate, Link } from 'react-router-dom';
+import Signinnav from './signinnav';
+import Footer from '../Homepage/Footer';
+import axiosInstance from '../axiosInstance';
 
 export default function ForgotPassword() {
-  
-let [forgetpass,setforgetpass]=useState({})
-let go =useNavigate()
+  const [step, setStep] = useState(1);
+  const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const go = useNavigate();
 
-let forgetpassdata=(e)=>{
-setforgetpass({...forgetpass, [e.target.name]:e.target.value})
-}
-
-let savedata=(e)=>{
-e.preventDefault();
-axios.post("https://freshcart-backend-orpin.vercel.app/forgetpass", {forgetpass}).then((res) => {
+  const requestReset = async (e) => {
+    e.preventDefault();
+    if (!email) { Swal.fire({ icon: 'warning', text: 'Please enter your email.' }); return; }
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post('/forgetpass', { email });
       if (res.data.status) {
-        Swal.fire({
-          text: "password change success",
-          icon: "success"
-        });
-        go("/")
+        Swal.fire({ icon: 'success', text: 'Reset token generated. Check the token below (email integration coming soon).', html: `<p>Your reset token:</p><code style="word-break:break-all;font-size:12px">${res.data.resetToken}</code><p style="margin-top:8px;font-size:12px;color:#888">In production this will be emailed to you.</p>` });
+        setStep(2);
+      } else {
+        Swal.fire({ icon: 'error', text: res.data.message || 'Email not found.' });
       }
-      else {
-        Swal.fire({
-          icon: "error",
-          text: "Invalid details!",
-        });
+    } catch { Swal.fire({ icon: 'error', text: 'Network error.' }); }
+    finally { setLoading(false); }
+  };
+
+  const resetPassword = async (e) => {
+    e.preventDefault();
+    if (!token || !newPassword) { Swal.fire({ icon: 'warning', text: 'Please fill in all fields.' }); return; }
+    if (newPassword.length < 8) { Swal.fire({ icon: 'warning', text: 'Password must be at least 8 characters.' }); return; }
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post('/resetpassword', { email, token, newPassword });
+      if (res.data.status) {
+        Swal.fire({ icon: 'success', text: 'Password reset successfully!' });
+        go('/Signin');
+      } else {
+        Swal.fire({ icon: 'error', text: res.data.message || 'Invalid or expired token.' });
       }
-    })
-}
+    } catch { Swal.fire({ icon: 'error', text: 'Network error.' }); }
+    finally { setLoading(false); }
+  };
 
   return (
     <>
-    <Signinnav/>
-    <section className="forgot-page">
-      <div className="forgot-container">
-
-        <div className="forgot-left">
-          <img src={forgotImg} alt="Forgot Password" />
-        </div>
-
-        <div className="forgot-right">
-          <div className="forgot-form-box">
-            <h1>Forgot your password?</h1>
-
-            <p>
-              Please enter the email address associated with your account and
-              We will email you a link to reset your password.
-            </p>
-
-            <form>
-              <input type="email" placeholder="Email" name="email" onChange={forgetpassdata} />
-              <input type="password" placeholder="new password" name="password" onChange={forgetpassdata} />
-
-
-              <button type="submit" className="reset-btn" onClick={savedata}>
-                Reset Password
-              </button>
-
-              <button type="button" className="back-btn">
-                Back
-              </button>
-            </form>
+      <Signinnav />
+      <section className="forgot-page">
+        <div className="forgot-container">
+          <div className="forgot-left">
+            <img src={forgotImg} alt="Forgot Password" />
+          </div>
+          <div className="forgot-right">
+            <div className="forgot-form-box">
+              {step === 1 ? (
+                <>
+                  <h1>Forgot your password?</h1>
+                  <p>Enter your email address and we'll send you a password reset link.</p>
+                  <form onSubmit={requestReset}>
+                    <input type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required />
+                    <button type="submit" className="reset-btn" disabled={loading}>{loading ? 'Sending...' : 'Send Reset Link'}</button>
+                    <Link to="/Signin"><button type="button" className="back-btn">Back to Sign In</button></Link>
+                  </form>
+                </>
+              ) : (
+                <>
+                  <h1>Enter Reset Token</h1>
+                  <p>Paste the token from your email and choose a new password.</p>
+                  <form onSubmit={resetPassword}>
+                    <input type="text" placeholder="Paste reset token here" value={token} onChange={e => setToken(e.target.value)} required />
+                    <input type="password" placeholder="New password (min 8 chars)" value={newPassword} onChange={e => setNewPassword(e.target.value)} required minLength={8} />
+                    <button type="submit" className="reset-btn" disabled={loading}>{loading ? 'Resetting...' : 'Reset Password'}</button>
+                    <button type="button" className="back-btn" onClick={() => setStep(1)}>Back</button>
+                  </form>
+                </>
+              )}
+            </div>
           </div>
         </div>
-
-      </div>
-    </section>
-    <Footer/>
+      </section>
+      <Footer />
     </>
   );
 }

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "../CSS/AccAddaddress.css";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import Swal from "sweetalert2";
+import { getUser } from "../auth";
 
 export default function AddressPopup({ closePopup }) {
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getUser();
 
   const [addressdata, setAddressdata] = useState({});
 
@@ -27,13 +28,13 @@ export default function AddressPopup({ closePopup }) {
 
     e.preventDefault();
 
-    axios.post("https://freshcart-backend-orpin.vercel.app/addaddress", {
+    axiosInstance.post("/addaddress", {
 
       addressdata: {
 
         ...addressdata,
 
-        userid: user._id
+        userid: user?._id
 
     }
 

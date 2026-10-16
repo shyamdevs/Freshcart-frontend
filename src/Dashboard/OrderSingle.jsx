@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/OrderSingle.css";
 import Dashsidebar from "./Dashsidebar";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import { useLocation, Link } from "react-router-dom";
 import { usePDF } from "react-to-pdf";
 import Swal from "sweetalert2";
@@ -14,7 +14,6 @@ export default function OrderSingle() {
     const orderNo = location.state?.orderNo;
 
     const [orders, setOrders] = useState([]);
-    console.log(orders)
 
     const [status, setStatus] = useState("");
 
@@ -39,11 +38,12 @@ export default function OrderSingle() {
 
         getOrder();
 
-    }, []);
+    }, [orderNo]);
 
     function getOrder() {
+        if (!orderNo) return;
 
-        axios.post("https://freshcart-backend-orpin.vercel.app/ordersingle", {
+        axiosInstance.post("/ordersingle", {
 
             orderNo: orderNo
 
@@ -51,9 +51,9 @@ export default function OrderSingle() {
 
             if (res.data.status) {
 
-                setOrders(res.data.order);
+                setOrders(res.data.order || []);
 
-                if (res.data.order.length > 0) {
+                if (res.data.order && res.data.order.length > 0) {
 
                     setStatus(res.data.order[0].status);
 
@@ -61,16 +61,17 @@ export default function OrderSingle() {
 
             }
 
-        });
+        }).catch(() => setOrders([]));
 
     }
 
     // save -------------status ----------
     function saveStatus() {
+        const activeOrderNo = orderNo || (orders.length > 0 ? orders[0].orderNo : "");
 
-        axios.post("https://freshcart-backend-orpin.vercel.app/updateorderstatus", {
+        axiosInstance.post("/updateorderstatus", {
 
-            orderNo: order.orderNo,
+            orderNo: activeOrderNo,
 
             status: status
 
@@ -85,10 +86,16 @@ export default function OrderSingle() {
                     confirmButtonColor: "#16a34a"
                 });
 
-                getOrders();
+                getOrder();
 
             }
 
+        }).catch(() => {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Failed to update order status."
+            });
         });
 
     }

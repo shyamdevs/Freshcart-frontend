@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../CSS/Addcategory.css";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import { Link, useNavigate } from "react-router-dom";
 import Dashsidebar from "./Dashsidebar";
 import Swal from "sweetalert2";
@@ -16,14 +16,16 @@ let go =useNavigate()
 
     const savedata = (e) => {
         e.preventDefault();
-        axios.post("https://freshcart-backend-orpin.vercel.app/category", { categoryvalue }).then(() => {
+        axiosInstance.post("/category", { categoryvalue }).then(() => {
                     Swal.fire({
                         text: "Category added!",
                         icon: "success"
                     });
                     go("/CategoryPage")
         
-                })
+                }).catch(() => {
+                    Swal.fire({ icon: "error", text: "Failed to add category" });
+                });
     }
 
 

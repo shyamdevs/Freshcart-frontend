@@ -8,7 +8,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 
 
 import "../CSS/Customer.css";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import Dashsidebar from "./Dashsidebar";
 import Swal from "sweetalert2";
 
@@ -21,14 +21,14 @@ const [currentPage, setCurrentPage] = useState(1);
 const usersPerPage = 10;
 
     function getusers() {
-        axios.get("https://freshcart-backend-orpin.vercel.app/allusers").then((res) => {
+        axiosInstance.get("/allusers").then((res) => {
             if (res.data.status) {
-                setusers(res.data.myallusers)
+                setusers(res.data.myallusers || [])
             }
             else {
-                console.log("not  users")
+                setusers([])
             }
-        })
+        }).catch(() => setusers([]));
     }
 
     useEffect(() => {
@@ -38,20 +38,32 @@ const usersPerPage = 10;
 
     // delete customer --------
 
-     let dltcustomer = (dltcus) => {
-    axios.post("https://freshcart-backend-orpin.vercel.app/deletecustomer", { dltcus }).then((res) => {
-      if (res.data.status) {
-
+    let dltcustomer = (dltcus) => {
         Swal.fire({
-          icon: "success",
-          text: "Customer Deleted"
-        }).then(() => {
-          window.location.reload()
-        })
-
-      }
-    })
-  }
+            title: "Delete Customer?",
+            text: "Are you sure you want to delete this customer?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            confirmButtonColor: "#d33"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosInstance.post("/deletecustomer", { dltcus }).then((res) => {
+                    if (res.data.status) {
+                        Swal.fire({
+                            icon: "success",
+                            text: "Customer Deleted",
+                            timer: 1200,
+                            showConfirmButton: false
+                        });
+                        setusers(myusers.filter(u => u._id !== dltcus._id));
+                    }
+                }).catch(() => {
+                    Swal.fire({ icon: "error", text: "Failed to delete customer" });
+                });
+            }
+        });
+    }
 
 //   -----------------------
 const filteredUsers = myusers.filter((item) => {

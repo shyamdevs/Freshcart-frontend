@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/AdminReviews.css";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import Dashsidebar from "./Dashsidebar";
 import Swal from "sweetalert2";
 import { FaTrash, FaStar } from "react-icons/fa";
@@ -19,15 +19,15 @@ const reviewsPerPage = 10;
 
     function getreview() {
 
-        axios.get("https://freshcart-backend-orpin.vercel.app/allreviews").then((res) => {
+        axiosInstance.get("/allreviews").then((res) => {
 
             if (res.data.status) {
 
-                setreview(res.data.myallreviews);
+                setreview(res.data.myallreviews || []);
 
             }
 
-        });
+        }).catch(() => setreview([]));
 
     }
 
@@ -55,7 +55,7 @@ const reviewsPerPage = 10;
 
             if (result.isConfirmed) {
 
-                axios.post("https://freshcart-backend-orpin.vercel.app/deletereview", {
+                axiosInstance.post("/deletereview", {
 
                     id: id
 

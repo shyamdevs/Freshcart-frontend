@@ -1,68 +1,87 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../CSS/Navbar.css";
 import logo from "../Images/freshcart-logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartPopup from "./CartPopup";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import Swal from "sweetalert2";
+import { getUser, logout } from "../auth";
+import { CartContext } from "./CartContext";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
   const [openAccount, setOpenAccount] = useState(false);
   const [locationName, setLocationName] = useState("Location");
 
   const [showCart, setShowCart] = useState(false);
 
-  const [wishlistCount, setWishlistCount] = useState(0);
-  const [cartCount, setCartCount] = useState(0);
+  const cartCtx = useContext(CartContext);
+  const user = getUser();
+  const userEmail = user?.email;
 
-  // ✅ 1. LocalStorage se logged-in user ka email extract karein
-  const user = JSON.parse(localStorage.getItem("user"));
-  const userEmail = user?.email || localStorage.getItem("email");
+  const [localWishlistCount, setLocalWishlistCount] = useState(0);
+  const [localCartCount, setLocalCartCount] = useState(0);
+
+  const wishlistCount = cartCtx?.wishlistCount ?? localWishlistCount;
+  const cartCount = cartCtx?.cartCount ?? localCartCount;
 
   useEffect(() => {
-    getWishlistCount();
-    getCartCount();
-  }, [userEmail]); // userEmail badalne par re-run hoga
+    if (!cartCtx) {
+      getWishlistCount();
+      getCartCount();
+    }
+  }, [userEmail]);
 
-  // ✅ 2. Wishlist Count Fetch (User Specific)
   const getWishlistCount = () => {
     if (!userEmail) {
-      setWishlistCount(0);
+      setLocalWishlistCount(0);
       return;
     }
 
-    axios
-      .post("https://freshcart-backend-orpin.vercel.app/wishlistcount", {
+    axiosInstance
+      .post("/wishlistcount", {
         email: userEmail,
       })
       .then((res) => {
         if (res.data.status) {
-          setWishlistCount(res.data.count);
+          setLocalWishlistCount(res.data.count);
         }
       })
       .catch((err) => console.log(err));
   };
 
-  // ✅ 3. Cart Count Fetch (User Specific)
- const getCartCount = () => {
+  const getCartCount = () => {
     if (!userEmail) {
-        setCartCount(0);
-        return;
+      setLocalCartCount(0);
+      return;
     }
 
-    axios.post("https://freshcart-backend-orpin.vercel.app/cartcount", {
+    axiosInstance
+      .post("/cartcount", {
         email: userEmail
-    })
-    .then((res) => {
+      })
+      .then((res) => {
         if (res.data.status) {
-            setCartCount(res.data.count);
+          setLocalCartCount(res.data.count);
         }
-    })
-    .catch((err) => {
+      })
+      .catch((err) => {
         console.log("Cart Count Error:", err);
+      });
+  };
+
+  const handleLogout = () => {
+    logout();
+    Swal.fire({
+      icon: "success",
+      title: "Logged Out",
+      timer: 1200,
+      showConfirmButton: false
     });
-};
+    setOpenAccount(false);
+    navigate("/Signin");
+  };
 
   
   //search -------------------------------------------------------------
@@ -78,12 +97,16 @@ export default function Navbar() {
       return;
     }
 
-    let res = await axios.get(
-      `https://freshcart-backend-orpin.vercel.app/searchproduct?keyword=${value}`
-    );
+    try {
+      let res = await axiosInstance.get(
+        `/searchproduct?keyword=${encodeURIComponent(value)}`
+      );
 
-    if (res.data.status) {
-      setSearchData(res.data.products);
+      if (res.data.status) {
+        setSearchData(res.data.products);
+      }
+    } catch (err) {
+      console.error(err);
     }
 
   };
@@ -373,33 +396,48 @@ const getLocation = async () => {
 
 
                 {openAccount && (
-
-                  <div className="dropdown" style={{ position: "absolute" }}>
-                    <Link to="/Signin">Sign In</Link>
-
-                    <Link to="/">Sign Up</Link>
-
-                    <Link to="/ForgotPassword">Forgot Password</Link>
-                    <div className="sub-menu">
-                      <span className="sub-btn">
-                        My Account
-                        <i className="fa-solid fa-angle-right"></i>
-                      </span>
-
-                      <div className="sub-dropdown">
-                        <Link to="/account/YourOrder">Orders</Link>
-                        <Link to="/account/settings">Settings</Link>
-                        <Link to="/account/Address">Address</Link>
-                        <Link to="/account/PaymentMethod">Payment Method</Link>
-                        <Link to="/account/notification">Notification</Link>
-                      </div>
-                    </div>
-
+                  <div className="dropdown" style={{ position: "absolute", minWidth: "180px", zIndex: 1000 }}>
+                    {user ? (
+                      <>
+                        <div style={{ padding: "8px 16px", fontWeight: "bold", borderBottom: "1px solid #eee", color: "#0aad0a" }}>
+                          Hello, {user.firstname || "User"}
+                        </div>
+                        <Link to="/account/YourOrder" onClick={() => setOpenAccount(false)}>My Orders</Link>
+                        <Link to="/account/settings" onClick={() => setOpenAccount(false)}>Settings</Link>
+                        <Link to="/account/Address" onClick={() => setOpenAccount(false)}>Address</Link>
+                        <Link to="/account/PaymentMethod" onClick={() => setOpenAccount(false)}>Payment Method</Link>
+                        <Link to="/account/notification" onClick={() => setOpenAccount(false)}>Notification</Link>
+                        <div style={{ borderTop: "1px solid #eee", marginTop: "4px" }}>
+                          <button
+                            onClick={handleLogout}
+                            style={{
+                              background: "none",
+                              border: "none",
+                              color: "#dc2626",
+                              cursor: "pointer",
+                              textAlign: "left",
+                              padding: "8px 16px",
+                              width: "100%",
+                              fontSize: "14px"
+                            }}
+                          >
+                            Sign Out
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <Link to="/Signin" onClick={() => setOpenAccount(false)}>Sign In</Link>
+                        <Link to="/" onClick={() => setOpenAccount(false)}>Sign Up</Link>
+                        <Link to="/ForgotPassword" onClick={() => setOpenAccount(false)}>Forgot Password</Link>
+                      </>
+                    )}
                   </div>
-
                 )}
               </li>
-              <li><Link to="/dash">Dashboard</Link></li>
+              {user?.isAdmin && (
+                <li><Link to="/dash">Dashboard</Link></li>
+              )}
               <li><a href="#">Docs</a></li>
             </ul>
           </div>
@@ -482,13 +520,43 @@ const getLocation = async () => {
 
           <button className="department-btn mobile-dept">All Departments</button>
 
-          <a href="#">Home</a>
+          <Link to="/Home" onClick={() => setOpenMenu(false)}>Home</Link>
           <a href="#">Shop</a>
           <a href="#">Stores</a>
           <a href="#">Mega menu</a>
           <a href="#">Pages</a>
-          <Link to="/account">Account</Link>
-          <Link to="/dash">Dashboard</Link>
+          {user ? (
+            <>
+              <Link to="/account/YourOrder" onClick={() => setOpenMenu(false)}>My Orders</Link>
+              <Link to="/account/settings" onClick={() => setOpenMenu(false)}>Account Settings</Link>
+              <Link to="/account/Address" onClick={() => setOpenMenu(false)}>Address Book</Link>
+              {user.isAdmin && (
+                <Link to="/dash" onClick={() => setOpenMenu(false)}>Admin Dashboard</Link>
+              )}
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setOpenMenu(false);
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#dc2626",
+                  textAlign: "left",
+                  padding: "10px 0",
+                  fontSize: "16px",
+                  cursor: "pointer"
+                }}
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/Signin" onClick={() => setOpenMenu(false)}>Sign In</Link>
+              <Link to="/" onClick={() => setOpenMenu(false)}>Sign Up</Link>
+            </>
+          )}
           <a href="#">Docs</a>
         </div>
 

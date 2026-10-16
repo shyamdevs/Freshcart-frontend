@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Addcategory.css";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import { Link, useNavigate } from "react-router-dom";
 import Dashsidebar from "./Dashsidebar";
 import Swal from "sweetalert2";
@@ -20,8 +20,8 @@ const go = useNavigate();
   const updatedata = (e) => {
     e.preventDefault();
 
-    axios.post(
-        "https://freshcart-backend-orpin.vercel.app/updatecategory",
+    axiosInstance.post(
+        "/updatecategory",
         {categoryvalue}
     ).then((res) => {
 
@@ -34,6 +34,8 @@ const go = useNavigate();
 
             go("/CategoryPage");
         }
+    }).catch(() => {
+        Swal.fire({ icon: "error", text: "Failed to update category" });
     });
 };
 

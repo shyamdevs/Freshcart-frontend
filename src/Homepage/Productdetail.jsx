@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import axiosInstance from "../axiosInstance";
 import Swal from "sweetalert2";
 
 import Navbar from "./Navbar";
@@ -11,152 +11,150 @@ import ProductDescription from "./ProductDescription";
 import ProductInformation from "./ProductInformation";
 import ReviewShow from "./Reviewshow";
 import SellerInfo from "./SellerInfo";
-
+import { getUser } from "../auth";
+import { CartContext } from "./CartContext";
 
 import "../CSS/ProductDetails.css";
 
 export default function ProductDetails() {
-const navigate = useNavigate();
+    const navigate = useNavigate();
     const location = useLocation();
+    const cartCtx = useContext(CartContext);
 
     const product = location.state?.product;
 
     const [selectedImage, setSelectedImage] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState("details");
- const user = JSON.parse(localStorage.getItem("user"));
+    const user = getUser();
+
     useEffect(() => {
-
         if (product) {
-
             setSelectedImage(product.image);
             setQuantity(1);
-
         }
-
     }, [product]);
 
     const increase = () => {
-
         setQuantity((prev) => prev + 1);
-
     };
 
     const decrease = () => {
-
-        setQuantity((prev) => {
-
-            if (prev > 1) {
-
-                return prev - 1;
-
-            }
-
-            return prev;
-
-        });
-
+        setQuantity((prev) => Math.max(1, prev - 1));
     };
 
     if (!product) {
-
-        return <h2>Product Not Found</h2>;
-
+        return (
+            <>
+                <Navbar />
+                <div style={{ textAlign: "center", padding: "5rem 2rem", minHeight: "50vh" }}>
+                    <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>Product Not Found</h2>
+                    <p style={{ color: "#666", marginBottom: "1.5rem" }}>
+                        We couldn't find the product you're looking for. It may have been removed or opened without selection.
+                    </p>
+                    <Link to="/Home" style={{ display: "inline-block", background: "#0aad0a", color: "#fff", padding: "10px 24px", borderRadius: "6px", textDecoration: "none", fontWeight: "bold" }}>
+                        Back to Shop
+                    </Link>
+                </div>
+                <Footer />
+            </>
+        );
     }
 
     // ==========================
     // Add To Cart
     // ==========================
-
-   const addToCart = () => {
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user) {
-        Swal.fire({
-            icon: "warning",
-            title: "Login Required",
-            text: "Please login first to add products to your cart.",
-            confirmButtonColor: "#0aad0a",
-        }).then(() => {
-            navigate("/Signin");
-        });
-
-        return;
-    }
-
-    axios.post(
-        "https://freshcart-backend-orpin.vercel.app/addtocart",
-        {
-            ...product,
-            email: user.email,
-        }
-    )
-    .then((result) => {
-        if (result.data.status) {
+    const addToCart = () => {
+        if (!user) {
             Swal.fire({
-                title: "Added!",
-                text: "Product added to cart",
-                icon: "success",
-                timer: 1500,
-                showConfirmButton: false,
-            });
-        } else {
-            Swal.fire({
-                title: "Already Added!",
-                text: result.data.message,
                 icon: "warning",
+                title: "Login Required",
+                text: "Please login first to add products to your cart.",
+                confirmButtonColor: "#0aad0a",
+            }).then(() => {
+                navigate("/Signin");
             });
+            return;
         }
-    });
-};
+
+        axiosInstance.post("/addtocart", {
+            ...product,
+            productId: product._id,
+            quantity: quantity,
+            email: user.email,
+        })
+        .then((result) => {
+            if (result.data.status) {
+                Swal.fire({
+                    title: "Added!",
+                    text: `${quantity} ${quantity > 1 ? 'items' : 'item'} added to cart`,
+                    icon: "success",
+                    timer: 1500,
+                    showConfirmButton: false,
+                });
+                if (cartCtx?.getCartCount) cartCtx.getCartCount();
+            } else {
+                Swal.fire({
+                    title: "Notice",
+                    text: result.data.message || "Already in cart",
+                    icon: "info",
+                });
+            }
+        })
+        .catch(() => {
+            Swal.fire({
+                icon: "error",
+                text: "Failed to add to cart",
+            });
+        });
+    };
 
     // ==========================
     // Wishlist
     // ==========================
-
-   const addToWishlist = () => {
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user) {
-        Swal.fire({
-            icon: "warning",
-            title: "Login Required",
-            text: "Please login first to add products to your wishlist.",
-            confirmButtonColor: "#0aad0a",
-        }).then(() => {
-            navigate("/Signin");
-        });
-
-        return;
-    }
-
-    axios.post(
-        "https://freshcart-backend-orpin.vercel.app/addwishlist",
-        {
-            ...product,
-            email: user.email,
-        }
-    )
-    .then((result) => {
-        if (result.data.status) {
+    const addToWishlist = () => {
+        if (!user) {
             Swal.fire({
-                title: "Added!",
-                text: "Product added to wishlist",
-                icon: "success",
-                timer: 1500,
-                showConfirmButton: false,
-            });
-        } else {
-            Swal.fire({
-                title: "Already Added!",
-                text: result.data.msg,
                 icon: "warning",
+                title: "Login Required",
+                text: "Please login first to add products to your wishlist.",
+                confirmButtonColor: "#0aad0a",
+            }).then(() => {
+                navigate("/Signin");
             });
+            return;
         }
-    });
-};
+
+        axiosInstance.post("/addwishlist", {
+            ...product,
+            productId: product._id,
+            email: user.email,
+        })
+        .then((result) => {
+            if (result.data.status) {
+                Swal.fire({
+                    title: "Added!",
+                    text: "Product added to wishlist",
+                    icon: "success",
+                    timer: 1500,
+                    showConfirmButton: false,
+                });
+                if (cartCtx?.getWishlistCount) cartCtx.getWishlistCount();
+            } else {
+                Swal.fire({
+                    title: "Notice",
+                    text: result.data.msg || "Already in wishlist",
+                    icon: "info",
+                });
+            }
+        })
+        .catch(() => {
+            Swal.fire({
+                icon: "error",
+                text: "Failed to add to wishlist",
+            });
+        });
+    };
 
     return (
 

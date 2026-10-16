@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import axiosInstance from "../axiosInstance";
+import { Link, useNavigate } from "react-router-dom";
 import "../CSS/Relatedproduct.css";
 import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
+import { getUser } from "../auth";
+import { CartContext } from "./CartContext";
 
 export default function RelatedProducts({ category, currentId }) {
 
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
+    const cartCtx = useContext(CartContext);
+    const user = getUser();
 
      const location = useLocation();
     const product = location.state?.product;
@@ -25,7 +30,7 @@ export default function RelatedProducts({ category, currentId }) {
 
     function getRelatedProducts() {
 
-        axios.get("https://freshcart-backend-orpin.vercel.app/allproduct")
+        axiosInstance.get("/allproduct")
             .then((res) => {
 
                 if (res.data.status) {
@@ -43,7 +48,8 @@ export default function RelatedProducts({ category, currentId }) {
 
                 }
 
-            });
+            })
+            .catch(() => setProducts([]));
 
     }
 
@@ -54,12 +60,24 @@ export default function RelatedProducts({ category, currentId }) {
 
 
 
-const addToCart = (product) => {
+const addToCart = (prod) => {
+    if (!user) {
+        Swal.fire({
+            icon: "warning",
+            title: "Login Required",
+            text: "Please sign in to add products to your cart.",
+            confirmButtonColor: "#0aad0a",
+        }).then(() => {
+            navigate("/Signin");
+        });
+        return;
+    }
 
-    axios.post(
-        "https://freshcart-backend-orpin.vercel.app/addtocart",
-        product
-    )
+    axiosInstance.post("/addtocart", {
+        ...prod,
+        productId: prod._id,
+        email: user.email
+    })
     .then((result) => {
 
         if (result.data.status) {
@@ -71,17 +89,24 @@ const addToCart = (product) => {
                 timer: 1500,
                 showConfirmButton: false
             });
+            if (cartCtx?.getCartCount) cartCtx.getCartCount();
 
         } else {
 
             Swal.fire({
-                title: "Already Added!",
-                text: result.data.message,
-                icon: "warning"
+                title: "Notice",
+                text: result.data.message || "Already in cart",
+                icon: "info"
             });
 
         }
 
+    })
+    .catch(() => {
+        Swal.fire({
+            icon: "error",
+            text: "Failed to add to cart"
+        });
     });
 
 };

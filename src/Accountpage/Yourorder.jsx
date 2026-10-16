@@ -1,38 +1,44 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import "../CSS/YourOrders.css";
 import OrderBillPopup from "./OrderBillPopup";
 import { FaEye } from "react-icons/fa";
+import { getUser } from "../auth";
+
 export default function YourOrders() {
 
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = getUser();
 
     const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [showBill, setShowBill] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [address, setAddress] = useState({});
 
     useEffect(() => {
-        getOrders();
-        getAddress();
+        if (user) {
+            getOrders();
+            getAddress();
+        }
     }, []);
 
     // Orders
     function getOrders() {
+        setLoading(true);
+        axiosInstance.post("/myorders", {
 
-        axios.post("https://freshcart-backend-orpin.vercel.app/myorders", {
-
-            userId: user._id
+            userId: user?._id
 
         }).then((res) => {
 
             if (res.data.status) {
 
-                setOrders(res.data.myorders);
+                setOrders(res.data.myorders || []);
 
             }
 
-        });
+        }).catch(() => setOrders([]))
+        .finally(() => setLoading(false));
 
     }
 
@@ -47,9 +53,9 @@ export default function YourOrders() {
     // Address
     function getAddress() {
 
-        axios.post("https://freshcart-backend-orpin.vercel.app/getaddress", {
+        axiosInstance.post("/getaddress", {
 
-            userId: user._id
+            userId: user?._id
 
         }).then((res) => {
 
@@ -63,7 +69,7 @@ export default function YourOrders() {
 
             }
 
-        });
+        }).catch(() => {});
 
     }
 

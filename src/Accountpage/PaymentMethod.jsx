@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/PaymentMethod.css";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import Swal from "sweetalert2";
-import AddPayment from "./AddPayment";
+import { getUser } from "../auth";
 
 export default function PaymentMethod() {
 
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = getUser();
 
     const [payments, setPayments] = useState([]);
-
-    const [showPopup, setShowPopup] = useState(false);
 
     // ==========================
     // Get Payments
@@ -18,33 +16,45 @@ export default function PaymentMethod() {
 
     function getPayments() {
 
-        axios.post(
+        axiosInstance.post(
 
-            "https://freshcart-backend-orpin.vercel.app/getpayment",
+            "/getpayment",
 
             {
 
-                userId: user._id
+                userId: user?._id
 
             }
 
         ).then((res) => {
 
-            if (res.data.status) {
+            if (res.data.status && res.data.payment) {
 
                 setPayments(res.data.payment);
 
+            } else {
+                setPayments([]);
             }
 
-        });
+        }).catch(() => setPayments([]));
 
     }
 
     useEffect(() => {
-
-        getPayments();
-
+        if (user) {
+            getPayments();
+        }
     }, []);
+
+    const handleAddPaymentClick = () => {
+        Swal.fire({
+            icon: "info",
+            title: "PCI-DSS Protected",
+            text: "For your security, credit/debit cards are not stored on our servers. Your payment details are securely processed directly by Razorpay during checkout.",
+            confirmButtonColor: "#0aad0a",
+            confirmButtonText: "Understood"
+        });
+    };
 
     // ==========================
     // Delete Payment
@@ -68,9 +78,9 @@ export default function PaymentMethod() {
 
             if (result.isConfirmed) {
 
-                axios.post(
+                axiosInstance.post(
 
-                    "https://freshcart-backend-orpin.vercel.app/deletepayment",
+                    "/deletepayment",
 
                     {
 
@@ -94,7 +104,7 @@ export default function PaymentMethod() {
 
                     }
 
-                });
+                }).catch(() => {});
 
             }
 
@@ -120,7 +130,7 @@ export default function PaymentMethod() {
 
                         className="add-payment-btn"
 
-                        onClick={() => setShowPopup(true)}
+                        onClick={handleAddPaymentClick}
 
                     >
 
@@ -223,21 +233,6 @@ export default function PaymentMethod() {
                 }
 
             </div>
-
-            {
-
-                showPopup &&
-
-                <AddPayment
-
-                    closePopup={() => setShowPopup(false)}
-
-                    refreshPayments={getPayments}
-
-                />
-
-            }
-
         </>
 
     );

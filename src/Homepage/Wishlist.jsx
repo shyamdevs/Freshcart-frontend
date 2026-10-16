@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
 import { FaTrash } from "react-icons/fa";
 import "../CSS/Wishlist.css"
-import axios from 'axios';
+import axiosInstance from '../axiosInstance';
 import Swal from 'sweetalert2';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { getUser } from '../auth';
+import { CartContext } from './CartContext';
 
 export default function Wishlist() {
 
 const navigate = useNavigate();
-const user = JSON.parse(localStorage.getItem("user"));
+const user = getUser();
+const cartCtx = useContext(CartContext);
 
   const [products, setProducts] = useState([]);
  useEffect(() => {
@@ -22,7 +25,7 @@ const user = JSON.parse(localStorage.getItem("user"));
       title: "Login Required",
       text: "Please login first.",
     }).then(() => {
-      navigate("/");
+      navigate("/Signin");
     });
 
     return;
@@ -33,7 +36,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 }, []);
 
   function getProducts() {
-    axios.post("https://freshcart-backend-orpin.vercel.app/wishlist", { email: user.email})
+    axiosInstance.post("/wishlist", { email: user?.email })
       .then((res) => {
         if (res.data.status) {
           setProducts(res.data.mywishlist);
@@ -44,15 +47,14 @@ const user = JSON.parse(localStorage.getItem("user"));
 
   const removeWishlist = (id) => {
 
-    axios.post("https://freshcart-backend-orpin.vercel.app/deletewishlist", {
+    axiosInstance.post("/deletewishlist", {
       _id: id,
-       email:user.email
+       email: user?.email
     }).then((res) => {
 
       if (res.data.status) {
-
         setProducts(products.filter(item => item._id !== id));
-
+        if (cartCtx?.getWishlistCount) cartCtx.getWishlistCount();
       }
 
     });
@@ -62,7 +64,11 @@ const user = JSON.parse(localStorage.getItem("user"));
 
   const addToCart = (item) => {
 
-    axios.post("https://freshcart-backend-orpin.vercel.app/addtocart", item)
+    axiosInstance.post("/addtocart", {
+      ...item,
+      productId: item.productId || item._id,
+      email: user?.email
+    })
       .then((res) => {
 
         if (res.data.status) {
@@ -76,12 +82,14 @@ const user = JSON.parse(localStorage.getItem("user"));
           });
 
           // Wishlist se remove bhi kar do
-          axios.post("https://freshcart-backend-orpin.vercel.app/deletewishlist", {
+          axiosInstance.post("/deletewishlist", {
             _id: item._id,
-             email: user.email
+             email: user?.email
           });
 
           setProducts(products.filter(p => p._id !== item._id));
+          if (cartCtx?.getCartCount) cartCtx.getCartCount();
+          if (cartCtx?.getWishlistCount) cartCtx.getWishlistCount();
 
         } else {
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import "../CSS/SellerVendor.css";
 import Dashsidebar from "./Dashsidebar";
 import { Link } from "react-router-dom";
@@ -19,16 +19,16 @@ export default function SellerVendor() {
 
     function getVendor() {
 
-        axios.get("https://freshcart-backend-orpin.vercel.app/vendordashboard")
+        axiosInstance.get("/vendordashboard")
             .then((res) => {
 
                 if (res.data.status) {
 
-                    setVendor(res.data.vendors);
+                    setVendor(res.data.vendors || []);
 
                 }
 
-            });
+            }).catch(() => setVendor([]));
 
     }
     // delete ----------------------

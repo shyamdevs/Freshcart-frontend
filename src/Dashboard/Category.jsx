@@ -8,7 +8,7 @@ import {
   FiChevronDown,
 } from "react-icons/fi";
 import { FaEdit, FaTrash } from "react-icons/fa"
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import { Link, useNavigate } from "react-router-dom";
 import Dashsidebar from "./Dashsidebar";
 import Swal from "sweetalert2";
@@ -19,14 +19,14 @@ const CategoryPage = () => {
   const go = useNavigate();
 
   function getallcategory() {
-    axios.get("https://freshcart-backend-orpin.vercel.app/AllCategory").then((res) => {
+    axiosInstance.get("/AllCategory").then((res) => {
       if (res.data.status) {
-        setcategory(res.data.myallcategory)
+        setcategory(res.data.myallcategory || [])
       }
       else {
-        document.write("not a single category added")
+        setcategory([])
       }
-    })
+    }).catch(() => setcategory([]));
   }
   // product length --------------------
 
@@ -34,11 +34,11 @@ const CategoryPage = () => {
   let [allproduct, setAllproduct] = useState([]);
 
   function getproduct() {
-    axios.get("https://freshcart-backend-orpin.vercel.app/allproduct").then((res) => {
+    axiosInstance.get("/allproduct").then((res) => {
       if (res.data.status) {
-        setAllproduct(res.data.myallproduct);
+        setAllproduct(res.data.myallproduct || []);
       }
-    });
+    }).catch(() => setAllproduct([]));
   }
 
 
@@ -53,18 +53,30 @@ const CategoryPage = () => {
   }, [])
   // delete category------------
   let dltcategory = (dltcat) => {
-    axios.post("https://freshcart-backend-orpin.vercel.app/deletecategory", { dltcat }).then((res) => {
-      if (res.data.status) {
-
-        Swal.fire({
-          icon: "success",
-          text: "Category Deleted"
-        }).then(() => {
-          window.location.reload()
-        })
-
+    Swal.fire({
+      title: "Delete Category?",
+      text: "Are you sure you want to delete this category?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      confirmButtonColor: "#d33"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosInstance.post("/deletecategory", { dltcat }).then((res) => {
+          if (res.data.status) {
+            Swal.fire({
+              icon: "success",
+              text: "Category Deleted",
+              timer: 1200,
+              showConfirmButton: false
+            });
+            setcategory(mycategory.filter(c => c._id !== dltcat._id));
+          }
+        }).catch(() => {
+          Swal.fire({ icon: "error", text: "Failed to delete category" });
+        });
       }
-    })
+    });
   }
 
   // -----------------------

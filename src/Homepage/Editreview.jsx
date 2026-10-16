@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import Swal from "sweetalert2";
 import "../CSS/ReviewPopup.css";
 
@@ -9,7 +9,7 @@ export default function EditReview() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const review = location.state.review;
+    const review = location.state?.review || {};
 
     const [reviewData, setReviewData] = useState({
 
@@ -43,9 +43,9 @@ export default function EditReview() {
 
         e.preventDefault();
 
-        axios.post(
+        axiosInstance.post(
 
-            "https://freshcart-backend-orpin.vercel.app/updatereview",
+            "/updatereview",
 
             reviewData
 

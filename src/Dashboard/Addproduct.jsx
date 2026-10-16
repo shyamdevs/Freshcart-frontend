@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "../CSS/Addproduct.css"
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 import Dashsidebar from './Dashsidebar'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
@@ -15,17 +15,17 @@ export default function Addproduct() {
 
     useEffect(() => {
 
-        axios.get("https://freshcart-backend-orpin.vercel.app/allvendor")
+        axiosInstance.get("/allvendor")
 
             .then((res) => {
 
                 if (res.data.status) {
 
-                    setVendors(res.data.myallvendor);
+                    setVendors(res.data.myallvendor || []);
 
                 }
 
-            });
+            }).catch(() => setVendors([]));
 
     }, []);
 
@@ -67,13 +67,15 @@ export default function Addproduct() {
 
     const savedata = (e) => {
         e.preventDefault();
-        axios.post("https://freshcart-backend-orpin.vercel.app/product", { productvalue }).then(() => {
+        axiosInstance.post("/product", { productvalue }).then(() => {
             Swal.fire({
                 text: "Product added!",
                 icon: "success"
             });
             go("/products")
 
+        }).catch(() => {
+            Swal.fire({ icon: "error", text: "Failed to add product" });
         })
     }
 
@@ -83,11 +85,11 @@ export default function Addproduct() {
 
 
     let getcategory = () => {
-        axios.get("https://freshcart-backend-orpin.vercel.app/AllCategory").then((res) => {
+        axiosInstance.get("/AllCategory").then((res) => {
             if (res.data.status) {
-                setcategories(res.data.myallcategory)
+                setcategories(res.data.myallcategory || [])
             }
-        })
+        }).catch(() => setcategories([]));
     }
     useEffect(() => {
         getcategory()

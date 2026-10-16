@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/SellerInfo.css"
 
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 
 export default function SellerInfo({ product }) {
 
     const [seller, setSeller] = useState({});
 
     useEffect(() => {
+        if (!product?.vendorId) return;
 
-        axios.post("https://freshcart-backend-orpin.vercel.app/vendorbyid", {
+        axiosInstance.post("/vendorbyid", {
 
             vendorId: product.vendorId
 
@@ -17,11 +18,11 @@ export default function SellerInfo({ product }) {
 
             if (res.data.status) {
 
-                setSeller(res.data.vendor);
+                setSeller(res.data.vendor || {});
 
             }
 
-        });
+        }).catch(() => setSeller({}));
 
     }, [product]);
 

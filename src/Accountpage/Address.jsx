@@ -1,34 +1,35 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Address.css";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import AddressPopup from "./AccAddaddress";
 import Swal from "sweetalert2";
+import { getUser } from "../auth";
 
 export default function Address() {
 
   const [showPopup, setShowPopup] = useState(false);
   const [addressData, setAddressData] = useState([]);
+  const user = getUser();
 
   useEffect(() => {
-    getAddress();
+    if (user) {
+      getAddress();
+    }
   }, []);
 
-  const user = JSON.parse(localStorage.getItem("user"));
   const getAddress = () => {
 
+    axiosInstance.post("/getaddress", {
 
-
-    axios.post("https://freshcart-backend-orpin.vercel.app/getaddress", {
-
-      userId: user._id
+      userId: user?._id
 
     }).then((res) => {
 
       if (res.data.status) {
-  setAddressData(res.data.addresses);
+        setAddressData(res.data.addresses || []);
       }
 
-    });
+    }).catch(() => setAddressData([]));
 
 
   };
@@ -38,9 +39,9 @@ export default function Address() {
 
   const setDefaultAddress = (id) => {
 
-    axios.post("https://freshcart-backend-orpin.vercel.app/setdefaultaddress", {
+    axiosInstance.post("/setdefaultaddress", {
 
-        userId: user._id,
+        userId: user?._id,
 
         addressId: id
 
@@ -52,7 +53,7 @@ export default function Address() {
 
         }
 
-    });
+    }).catch(() => {});
 
 }
 
@@ -76,7 +77,7 @@ export default function Address() {
 
       if (result.isConfirmed) {
 
-        axios.post("https://freshcart-backend-orpin.vercel.app/deleteaddress", {
+        axiosInstance.post("/deleteaddress", {
 
           _id: id
 
@@ -96,7 +97,7 @@ export default function Address() {
 
           }
 
-        });
+        }).catch(() => {});
 
       }
 

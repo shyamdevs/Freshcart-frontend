@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/ReviewShow.css";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import Swal from "sweetalert2";
 import ReviewPopup from "./Reviewform";
 import { useNavigate } from "react-router-dom";
-
+import { getUser } from "../auth";
 
 export default function ReviewShow({ productId }) {
 
     const [showPopup, setShowPopup] = useState(false);
     const [reviews, setReviews] = useState([]);
     const [editData, setEditData] = useState(null);
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = getUser();
 const navigate = useNavigate();
     useEffect(() => {
 
@@ -23,8 +23,8 @@ const navigate = useNavigate();
 
     const getReviews = () => {
 
-        axios.post(
-            "https://freshcart-backend-orpin.vercel.app/getreview",
+        axiosInstance.post(
+            "/getreview",
             {
                 productId
             }
@@ -33,11 +33,12 @@ const navigate = useNavigate();
 
             if (res.data.status) {
 
-                setReviews(res.data.myreview);
+                setReviews(res.data.myreview || []);
 
             }
 
-        });
+        })
+        .catch(() => setReviews([]));
 
     };
 
@@ -61,9 +62,9 @@ const navigate = useNavigate();
 
             if (result.isConfirmed) {
 
-                axios.post(
+                axiosInstance.post(
 
-                    "https://freshcart-backend-orpin.vercel.app/deletereview",
+                    "/deletereview",
 
                     {
                         id

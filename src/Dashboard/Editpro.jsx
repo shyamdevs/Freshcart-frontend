@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "../CSS/Addproduct.css"
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 import Dashsidebar from './Dashsidebar'
 import Swal from 'sweetalert2'
 import { useLocation, useNavigate } from "react-router-dom";
@@ -17,17 +17,17 @@ export default function Editpro() {
 
   useEffect(() => {
 
-    axios.get("https://freshcart-backend-orpin.vercel.app/allvendor")
+    axiosInstance.get("/allvendor")
 
         .then((res) => {
 
             if (res.data.status) {
 
-                setVendors(res.data.myallvendor);
+                setVendors(res.data.myallvendor || []);
 
             }
 
-        });
+        }).catch(() => setVendors([]));
 
 }, []);
 
@@ -67,7 +67,7 @@ export default function Editpro() {
     const updatedata = (e) => {
         e.preventDefault();
 
-        axios.post("https://freshcart-backend-orpin.vercel.app/updateproduct", { productvalue }).then((res) => {
+        axiosInstance.post("/updateproduct", { productvalue }).then((res) => {
             if (res.data.status) {
                 Swal.fire({
                     icon: "success",
@@ -76,6 +76,8 @@ export default function Editpro() {
 
                 go("/products");
             }
+        }).catch(() => {
+            Swal.fire({ icon: "error", text: "Failed to update product" });
         });
     };
 

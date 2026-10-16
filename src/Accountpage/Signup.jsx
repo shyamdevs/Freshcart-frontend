@@ -1,101 +1,81 @@
-import React, { useState } from "react";
-import signupImg from "../Images/signup-g.svg";
-import "../CSS/Signup.css";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import Signinnav from "./signinnav";
-import Footer from "../Homepage/Footer";
+import React, { useState } from 'react';
+import signupImg from '../Images/signup-g.svg';
+import '../CSS/Signup.css';
+import { useNavigate, Link } from 'react-router-dom';
+import Signinnav from './signinnav';
+import Footer from '../Homepage/Footer';
+import Swal from 'sweetalert2';
+import axiosInstance from '../axiosInstance';
 
 export default function Signup() {
-
-let [alldata,setalldata]=useState({})
- let go =useNavigate()
-
-let signupdata=(e)=>{
-setalldata({...alldata, [e.target.name]:e.target.value})
-}
-
-let savedata=(e)=>{
-e.preventDefault();
-axios.post("https://freshcart-backend-orpin.vercel.app/signup", {alldata}).then(()=>{
-   go("/Signin")
-})
-}
-
-
-
-
-
-
-
+  const [alldata, setalldata] = useState({ firstname: '', lastname: '', email: '', password: '' });
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const go = useNavigate();
+
+  const signupdata = (e) => {
+    setalldata({ ...alldata, [e.target.name]: e.target.value });
+  };
+
+  const savedata = async (e) => {
+    e.preventDefault();
+    if (!alldata.firstname || !alldata.lastname || !alldata.email || !alldata.password) {
+      Swal.fire({ icon: 'warning', text: 'Please fill in all fields.' }); return;
+    }
+    if (alldata.password.length < 8) {
+      Swal.fire({ icon: 'warning', text: 'Password must be at least 8 characters.' }); return;
+    }
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post('/signup', { alldata });
+      if (res.data.status) {
+        Swal.fire({ icon: 'success', text: 'Account created! Please sign in.', timer: 1500, showConfirmButton: false });
+        setTimeout(() => go('/Signin'), 1500);
+      } else {
+        Swal.fire({ icon: 'error', text: res.data.message || 'Registration failed. Try again.' });
+      }
+    } catch (err) {
+      Swal.fire({ icon: 'error', text: 'Network error. Please try again.' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
-    <Signinnav/>
-    <section className="register-page">
-      <div className="register-container">
-
-        <div className="register-left">
-          <img src={signupImg} alt="FreshCart Signup" />
-        </div>
-
-        <div className="register-right">
-          <div className="register-form-box">
-            <h1>Get Start Shopping</h1>
-            <p>
-              Welcome to FreshCart! Enter your email to get started.
-            </p>
-
-            <form onSubmit={savedata}>
-              <div className="name-row">
-                <input type="text" placeholder="First Name" name="firstname" onChange={signupdata} required />
-                <input type="text" placeholder="Last Name" name="lastname" onChange={signupdata} required/>
-              </div>
-
-              <input type="email" placeholder="Email" name="email" onChange={signupdata} required/>
-
-              <div className="password-field">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="*****" name="password" onChange={signupdata} required
-                />
-
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12Z" stroke="currentColor" strokeWidth="2"/>
-                      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                  ) : (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <path d="M17.94 17.94C16.23 19.24 14.23 20 12 20 5 20 1 12 1 12a21.75 21.75 0 0 1 5.06-5.94" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a21.78 21.78 0 0 1-2.16 3.19" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M14.12 14.12A3 3 0 0 1 9.88 9.88" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M1 1l22 22" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                  )}
+      <Signinnav />
+      <section className="register-page">
+        <div className="register-container">
+          <div className="register-left">
+            <img src={signupImg} alt="FreshCart Signup" />
+          </div>
+          <div className="register-right">
+            <div className="register-form-box">
+              <h1>Get Start Shopping</h1>
+              <p>Welcome to FreshCart! Create your free account.</p>
+              <form onSubmit={savedata} noValidate>
+                <div className="name-row">
+                  <input type="text" placeholder="First Name" name="firstname" value={alldata.firstname} onChange={signupdata} required />
+                  <input type="text" placeholder="Last Name" name="lastname" value={alldata.lastname} onChange={signupdata} required />
+                </div>
+                <input type="email" placeholder="Email" name="email" value={alldata.email} onChange={signupdata} required />
+                <div className="password-field">
+                  <input type={showPassword ? 'text' : 'password'} placeholder="Password (min 8 chars)" name="password" value={alldata.password} onChange={signupdata} required minLength={8} />
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} aria-label="Toggle password">
+                    {showPassword ? '🙈' : '👀'}
+                  </button>
+                </div>
+                <button className="register-btn" type="submit" disabled={loading}>
+                  {loading ? 'Creating Account...' : 'Register'}
                 </button>
-              </div>
-
-              <button className="register-btn" type="submit" >
-                Register
-              </button>
-            </form>
-
-            <h6>
-              By continuing, you agree to our{" "}
-              <a href="#">Terms of Service</a> &{" "}
-              <a href="#">Privacy Policy</a>
-            </h6>
+              </form>
+              <h6>By continuing, you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></h6>
+              <p style={{marginTop:'1rem', textAlign:'center'}}>Already have an account? <Link to="/Signin">Sign In</Link></p>
+            </div>
           </div>
         </div>
-
-      </div>
-    </section>
-<Footer/>
+      </section>
+      <Footer />
     </>
   );
 }

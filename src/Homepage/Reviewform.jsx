@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../CSS/ReviewPopup.css";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import Swal from "sweetalert2";
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
+import { getUser } from "../auth";
 
 export default function ReviewPopup({
 
@@ -13,14 +14,14 @@ export default function ReviewPopup({
 
 }) {
 
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = getUser();
 
     const [reviewData, setReviewData] = useState({
 
         productId: productId,
 
 
-        name: user?.firstname || "",
+        name: user ? `${user.firstname} ${user.lastname}`.trim() : "",
 
         email: user?.email || "",
      
@@ -46,12 +47,19 @@ export default function ReviewPopup({
     const saveReview = (e) => {
 
         e.preventDefault();
-            console.log(reviewData);
 
+        if (!user) {
+            Swal.fire({
+                icon: "warning",
+                title: "Login Required",
+                text: "Please sign in to submit a review."
+            });
+            return;
+        }
 
-        axios.post(
+        axiosInstance.post(
 
-            "https://freshcart-backend-orpin.vercel.app/addreview",
+            "/addreview",
 
             reviewData
 

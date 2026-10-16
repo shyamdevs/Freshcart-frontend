@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/AdminOrderList.css";
 import Dashsidebar from "./Dashsidebar";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import { FaEllipsisV } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -29,15 +29,15 @@ const location = useLocation();
 
     function getOrders() {
 
-        axios.get("https://freshcart-backend-orpin.vercel.app/orders").then((res) => {
+        axiosInstance.get("/orders").then((res) => {
 
             if (res.data.status) {
 
-                setOrders(res.data.myorders);
+                setOrders(res.data.myorders || []);
 
             }
 
-        });
+        }).catch(() => setOrders([]));
 
     }
 
